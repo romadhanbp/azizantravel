@@ -19,5 +19,12 @@ export const testimonials = [
     text: 'Paket 3D2N Lombok Explorer benar-benar worth it! Semua destinasi dikunjungi sesuai jadwal, driver juga merangkap guide dadakan yang informatif. Harga terjangkau kualitas premium!',
     rating: 5,
     avatar: 'BW'
+  },
+  {
+    name: 'Rina Nuraeni',
+    origin: 'Jakarta — Paket Honeymoon',
+    text: 'Paket honeymoon-nya romantis banget! Dari pickup sampai check-out hotel semua diurus. Thanks Azizan Travel udah bikin momen spesial kami makin sempurna!',
+    rating: 5,
+    avatar: 'RN'
   }
 ];
