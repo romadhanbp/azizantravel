@@ -1,0 +1,20 @@
+{
+  "name": "azizantravel",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Azizan Travel - Paket Wisata & Transportasi Lombok",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:cms": "concurrently \"astro dev\" \"decap-server\"",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3",
+    "decap-server": "^3.9.1"
+  }
+}

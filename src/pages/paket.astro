@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import PackageCard from '../components/PackageCard.astro';
+import { getCollection } from 'astro:content';
+
+const packages = (await getCollection('packages'))
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+---
+
+<Base title="Paket Wisata Lombok - Azizan Travel | Tour, Transport & Airport Transfer" description="Temukan paket wisata Lombok terlengkap: tour Gili Islands, trekking Rinjani, Pink Beach, airport transfer, dan sewa kendaraan harian. Harga transparan, driver berpengalaman." activePage="paket">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Beranda</a>
+        <span>/</span>
+        <span>Paket</span>
+      </div>
+      <span class="section-tag">Eksplorasi Lombok</span>
+      <h1 class="section-title">Semua Paket Wisata</h1>
+      <p>Pilih dari berbagai paket wisata, transport, dan layanan yang kami siapkan khusus untuk Anda</p>
+    </div>
+  </section>
+
+  <section class="paket-section">
+    <div class="container">
+      <div class="paket-filter-bar">
+        <label>Filter:</label>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all" id="filterAll">🌐 Semua</button>
+          <button class="filter-tab" data-filter="wisata" id="filterWisata">🏖️ Wisata</button>
+          <button class="filter-tab" data-filter="petualangan" id="filterPetualangan">⛰️ Petualangan</button>
+          <button class="filter-tab" data-filter="bisnis" id="filterBisnis">💼 Bisnis</button>
+        </div>
+      </div>
+      <div class="paket-all-grid" id="paketAllGrid">
+        {packages.map(p => {
+          let cat = p.data.category;
+          if (p.data.slug && ['avanza', 'xenia', 'innova'].includes(p.data.slug)) cat = 'transport';
+          if (cat === 'custom') cat = 'bisnis';
+          return (
+            <PackageCard
+              title={p.data.title}
+              slug={p.data.slug}
+              category={cat}
+              image={p.data.image}
+              badge={p.data.badge}
+              duration={p.data.duration}
+              maxGroup={p.data.maxGroup}
+              capacity={p.data.capacity}
+              luggage={p.data.luggage}
+              price={p.data.price}
+              pricePer={p.data.pricePer}
+              includes={p.data.includes}
+              description={p.data.description}
+              showIncludes={true}
+            />
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2 class="section-title">Tidak Ada yang Cocok? 🤔</h2>
+          <p>Ceritakan kebutuhan Anda dan kami akan buatkan itinerary khusus sesuai budget dan keinginan Anda.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-white" id="openBookingModal">📋 Buat Paket Custom</a>
+          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20saya%20ingin%20konsultasi%20paket%20custom&utm_source=website" class="btn btn-wa" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .paket-section { padding: 60px 0 80px; }
+    .paket-filter-bar {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .paket-filter-bar label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--dark);
+    }
+  </style>
+
+</Base>

@@ -1,0 +1,64 @@
+---
+export interface Props {
+  title: string;
+  slug: string;
+  category: string;
+  image: string;
+  badge?: string;
+  duration: string;
+  maxGroup?: number;
+  capacity?: string;
+  luggage?: string;
+  price: string;
+  pricePer: string;
+  includes: string[];
+  description: string;
+  showIncludes?: boolean;
+}
+
+const { title, slug, image, badge, category, duration, maxGroup, capacity, luggage, price, pricePer, includes, description, showIncludes = false } = Astro.props;
+---
+
+<div class="package-card reveal" data-category={category}>
+  <div class="card-image">
+    <img src={image} alt={title} loading="lazy" />
+    {badge && (() => {
+      const badges = {
+        'Populer': { class: 'popular', label: '⭐ Populer' },
+        'Favorit': { class: '', label: '🔥 Favorit' },
+        'Best Value': { class: '', label: '🎁 Best Value' },
+        'Ekonomis': { class: '', label: '🚗 Ekonomis' },
+        'Hemat': { class: '', label: '💰 Hemat Budget' },
+        'Premium': { class: 'popular', label: '⭐ Premium' },
+        'Honeymoon': { class: 'popular', label: '💍 Honeymoon' },
+      };
+      const match = Object.keys(badges).find(k => badge.includes(k));
+      const b = match ? badges[match] : { class: '', label: badge };
+      return <div class={`card-badge${b.class ? ' ' + b.class : ''}`} set:html={b.label}></div>;
+    })()}
+  </div>
+  <div class="card-body">
+    <div class="card-category">{category}</div>
+    <h3 class="card-title">{title}</h3>
+    <div class="card-meta">
+      <span class="meta-item">⏱️ {duration}</span>
+      {maxGroup && <span class="meta-item">👥 Maks {maxGroup} Org</span>}
+      {capacity && <span class="meta-item">👥 {capacity}</span>}
+      {luggage && <span class="meta-item">🧳 {luggage}</span>}
+    </div>
+    <p class="card-desc">{description}</p>
+    {showIncludes && includes.length > 0 && (
+      <ul class="paket-include-list">
+        {includes.map(item => <li>✅ {item}</li>)}
+      </ul>
+    )}
+    <div class="card-footer">
+      <div class="card-price">
+        <span class="price-from">mulai dari</span>
+        <span class="price-amount">{price}</span>
+        {pricePer && <span class="price-per">/{pricePer}</span>}
+      </div>
+      <a href="#" class="card-btn book-btn" data-package={title}>📩 Pesan</a>
+    </div>
+  </div>
+</div>

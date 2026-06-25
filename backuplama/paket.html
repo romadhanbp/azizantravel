@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paket Wisata Lombok - Azizan Travel | Tour, Transport & Airport Transfer</title>
+  <meta name="description" content="Temukan paket wisata Lombok terlengkap: tour Gili Islands, trekking Rinjani, Pink Beach, airport transfer, dan sewa kendaraan harian. Harga transparan, driver berpengalaman." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>" />
+  <script src="js/seo-config.js"></script>
+  <style>
+    .paket-section { padding: 60px 0 80px; }
+
+    .paket-filter-bar {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .paket-filter-bar label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--dark);
+    }
+
+    .paket-all-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    @media (max-width: 1024px) { .paket-all-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .paket-all-grid { grid-template-columns: 1fr; } }
+
+    .paket-include-list {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .paket-include-list li {
+      font-size: 0.8rem;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .paket-include-list li::before {
+      content: '✓';
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🧭</div>
+        <div class="logo-text">
+          <span class="logo-name">Azizan Travel</span>
+          <span class="logo-tagline">Explore Lombok</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">Beranda</a></li>
+        <li><a href="paket.html" class="nav-link active">Paket Wisata</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+        <li><a href="#" class="nav-link nav-cta" id="navBooking">Pesan Sekarang</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Beranda</a>
+        <span>/</span>
+        <span>Paket Wisata</span>
+      </div>
+      <span class="section-tag">Eksplorasi Lombok</span>
+      <h1 class="section-title">Semua Paket Wisata & Transportasi</h1>
+      <p>Pilih dari berbagai paket wisata, transport, dan layanan yang kami siapkan khusus untuk Anda</p>
+    </div>
+  </section>
+
+  <!-- PAKET SECTION -->
+  <section class="paket-section">
+    <div class="container">
+      <div class="paket-filter-bar">
+        <label>Filter:</label>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all" id="filterAll">🌐 Semua</button>
+          <button class="filter-tab" data-filter="wisata" id="filterWisata">🏖️ Wisata</button>
+          <button class="filter-tab" data-filter="transport" id="filterTransport">✈️ Transportasi</button>
+          <button class="filter-tab" data-filter="bisnis" id="filterBisnis">💼 Bisnis</button>
+          <button class="filter-tab" data-filter="petualangan" id="filterPetualangan">⛰️ Petualangan</button>
+        </div>
+      </div>
+
+      <div class="paket-all-grid" id="paketAllGrid">
+
+        <!-- 1. Gili Trawangan -->
+        <div class="package-card reveal" data-category="wisata">
+          <div class="card-image">
+            <img src="img/gili-trawangan.jpg" alt="Paket Gili Trawangan Full Day" loading="lazy" />
+            <div class="card-badge popular">⭐ Paling Populer</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">🏝️ Wisata Alam</div>
+            <h3 class="card-title">Gili Trawangan Full Day</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ 1 Hari</span>
+              <span class="meta-item">👥 Maks 8 Org</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Transportasi PP + driver</li>
+              <li>Speedboat ke Gili Trawangan</li>
+              <li>Snorkeling equipment</li>
+              <li>Makan siang</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 450rb</span>
+                <span class="price-per">/orang</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Gili Trawangan Full Day">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Pink Beach -->
+        <div class="package-card reveal" data-category="wisata">
+          <div class="card-image">
+            <img src="img/pink-beach.jpg" alt="Pink Beach & Tanjung Ringgit" loading="lazy" />
+            <div class="card-badge">🔥 Favorit</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">🌊 Wisata Pantai</div>
+            <h3 class="card-title">Pink Beach & Tanjung Ringgit</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ 1 Hari</span>
+              <span class="meta-item">👥 Maks 6 Org</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Transportasi PP + driver</li>
+              <li>Guide lokal</li>
+              <li>Tiket masuk</li>
+              <li>Air mineral</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 350rb</span>
+                <span class="price-per">/orang</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Pink Beach & Tanjung Ringgit">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Rinjani Trekking -->
+        <div class="package-card reveal" data-category="petualangan">
+          <div class="card-image">
+            <img src="img/rinjani-trekking.jpg" alt="Trekking Gunung Rinjani" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-category">⛰️ Petualangan</div>
+            <h3 class="card-title">Trekking Gunung Rinjani 2D1N</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ 2 Hari 1 Malam</span>
+              <span class="meta-item">👥 Maks 12 Org</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Porter + guide berpengalaman</li>
+              <li>Camping gear lengkap</li>
+              <li>Makan 3x/hari</li>
+              <li>Transportasi Mataram-Sembalun</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 1.2jt</span>
+                <span class="price-per">/orang</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Trekking Gunung Rinjani 2D1N">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Airport Transfer -->
+        <div class="package-card reveal" data-category="transport">
+          <div class="card-image">
+            <img src="img/transport-bisnis.jpg" alt="Airport Transfer BIL Lombok" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-category">✈️ Airport Transfer</div>
+            <h3 class="card-title">Transfer Bandara BIL Lombok</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ 24 Jam</span>
+              <span class="meta-item">👥 Maks 8 Org</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Jemput/antar bandara BIL</li>
+              <li>Ke seluruh wilayah Lombok</li>
+              <li>Mobil ber-AC + bersih</li>
+              <li>Tepat waktu (on-time guarantee)</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 200rb</span>
+                <span class="price-per">/trip</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Airport Transfer BIL Lombok">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Avanza -->
+        <div class="package-card reveal" data-category="transport">
+          <div class="card-image">
+            <img src="img/transport-bisnis.jpg" alt="Sewa Avanza Lombok" loading="lazy" />
+            <div class="card-badge">🚗 Ekonomis</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">🚙 MPV Mini</div>
+            <h3 class="card-title">Sewa Avanza / Calya</h3>
+            <div class="card-meta">
+              <span class="meta-item">👥 Kapasitas 7 Orang</span>
+              <span class="meta-item">🧳 2-3 Koper</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Driver profesional + BBM</li>
+              <li>AC dingin & terawat</li>
+              <li>Antar jemput hotel</li>
+              <li>Cocok city tour & short trip</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 300rb</span>
+                <span class="price-per">/hari</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Sewa Avanza/Calya">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Xenia -->
+        <div class="package-card reveal" data-category="transport">
+          <div class="card-image">
+            <img src="img/transport-bisnis.jpg" alt="Sewa Xenia Lombok" loading="lazy" />
+            <div class="card-badge">💰 Hemat Budget</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">🚙 MPV Mini</div>
+            <h3 class="card-title">Sewa Xenia</h3>
+            <div class="card-meta">
+              <span class="meta-item">👥 Kapasitas 7 Orang</span>
+              <span class="meta-item">🧳 2-3 Koper</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Driver profesional + BBM</li>
+              <li>AC dingin & terawat</li>
+              <li>Antar jemput hotel</li>
+              <li>Alternatif paling ekonomis</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 280rb</span>
+                <span class="price-per">/hari</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Sewa Xenia">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Innova -->
+        <div class="package-card reveal" data-category="transport">
+          <div class="card-image">
+            <img src="img/transport-bisnis.jpg" alt="Sewa Innova Lombok" loading="lazy" />
+            <div class="card-badge popular">⭐ Premium</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">🚐 MPV Premium</div>
+            <h3 class="card-title">Sewa Innova / Zenix</h3>
+            <div class="card-meta">
+              <span class="meta-item">👥 Kapasitas 7-8 Orang</span>
+              <span class="meta-item">🧳 3-4 Koper</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Driver profesional + BBM</li>
+              <li>AC dingin & terawat</li>
+              <li>Antar jemput hotel</li>
+              <li>Kabin luas, nyaman jarak jauh</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 500rb</span>
+                <span class="price-per">/hari</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Sewa Innova/Zenix">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Sewa Kendaraan -->
+        <div class="package-card reveal" data-category="transport">
+          <div class="card-image">
+            <img src="img/transport-bisnis.jpg" alt="Sewa Kendaraan Harian Lombok" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-category">🚗 Sewa Harian</div>
+            <h3 class="card-title">Sewa Kendaraan + Driver Harian</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ 12 Jam</span>
+              <span class="meta-item">🚗 Bebas Rute</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Kendaraan + driver</li>
+              <li>BBM & parkir termasuk</li>
+              <li>Bebas tujuan se-Lombok</li>
+              <li>Cocok untuk bisnis & survey</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 450rb</span>
+                <span class="price-per">/hari</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Sewa Kendaraan + Driver Harian">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Lombok Explorer 3D2N -->
+        <div class="package-card reveal" data-category="wisata">
+          <div class="card-image">
+            <img src="img/paket-wisata.jpg" alt="Lombok Explorer 3D2N" loading="lazy" />
+            <div class="card-badge">🎁 Best Value</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">🗺️ Paket Lengkap</div>
+            <h3 class="card-title">Lombok Explorer 3D2N</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ 3 Hari 2 Malam</span>
+              <span class="meta-item">👥 Maks 8 Org</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Transportasi + guide 3 hari</li>
+              <li>Hotel 2 malam (pilihan)</li>
+              <li>10+ destinasi Lombok</li>
+              <li>Snorkeling + island hopping</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 1.5jt</span>
+                <span class="price-per">/orang</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Lombok Explorer 3D2N">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Senggigi Sunset -->
+        <div class="package-card reveal" data-category="wisata">
+          <div class="card-image">
+            <img src="img/hero-lombok.jpg" alt="Senggigi Sunset Tour" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-category">🌅 Wisata Sore</div>
+            <h3 class="card-title">Senggigi Sunset & Seafood Tour</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ Setengah Hari</span>
+              <span class="meta-item">👥 Maks 8 Org</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Transportasi PP + driver</li>
+              <li>Pantai Senggigi & Malimbu</li>
+              <li>Sunset view terbaik</li>
+              <li>Makan malam seafood</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 280rb</span>
+                <span class="price-per">/orang</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Senggigi Sunset & Seafood Tour">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Honeymoon Package -->
+        <div class="package-card reveal" data-category="wisata">
+          <div class="card-image">
+            <img src="img/gili-trawangan.jpg" alt="Paket Honeymoon Lombok" loading="lazy" />
+            <div class="card-badge popular">💍 Honeymoon</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">💑 Romantis</div>
+            <h3 class="card-title">Paket Honeymoon Lombok 4D3N</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ 4 Hari 3 Malam</span>
+              <span class="meta-item">👥 2 Orang</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Hotel romantic + sarapan</li>
+              <li>Gili Trawangan & Gili Meno</li>
+              <li>Photoshoot session</li>
+              <li>Candle dinner setup</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">mulai dari</span>
+                <span class="price-amount">Rp 3.5jt</span>
+                <span class="price-per">/pasangan</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Paket Honeymoon Lombok 4D3N">📩 Pesan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Custom Trip -->
+        <div class="package-card reveal" data-category="bisnis">
+          <div class="card-image">
+            <img src="img/paket-wisata.jpg" alt="Custom Trip Lombok" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-category">✨ Custom</div>
+            <h3 class="card-title">Paket Custom Sesuai Keinginan</h3>
+            <div class="card-meta">
+              <span class="meta-item">⏱️ Fleksibel</span>
+              <span class="meta-item">👥 Bebas</span>
+            </div>
+            <ul class="paket-include-list">
+              <li>Itinerary sesuai request</li>
+              <li>Pilih kendaraan sesuai grup</li>
+              <li>Konsultasi gratis via WA</li>
+              <li>Harga terbaik dijamin</li>
+            </ul>
+            <div class="card-footer">
+              <div class="card-price">
+                <span class="price-from">Mulai dari</span>
+                <span class="price-amount">Nego 😊</span>
+              </div>
+              <a href="#" class="card-btn book-btn" data-package="Paket Custom">📩 Konsultasi</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2 class="section-title">Tidak Ada yang Cocok? 🤔</h2>
+          <p>Ceritakan kebutuhan Anda dan kami akan buatkan itinerary khusus sesuai budget dan keinginan Anda.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-white" id="openBookingModal">📋 Buat Paket Custom</a>
+          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20saya%20ingin%20konsultasi%20paket%20custom&utm_source=website" class="btn btn-wa" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">🧭</div>
+            <div class="logo-text">
+              <span class="logo-name">Azizan Travel</span>
+              <span class="logo-tagline">Explore Lombok</span>
+            </div>
+          </div>
+          <p class="footer-desc">Melayani wisata, transportasi, dan keperluan perjalanan Anda di Lombok dengan profesional, nyaman, dan terpercaya sejak 2015.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Layanan Kami</h4>
+          <ul class="footer-links">
+            <li><a href="paket.html">Paket Wisata Lombok</a></li>
+            <li><a href="paket.html">Airport Transfer</a></li>
+            <li><a href="paket.html">Sewa Kendaraan Harian</a></li>
+            <li><a href="paket.html">Trekking Rinjani</a></li>
+            <li><a href="paket.html">Wisata Gili Islands</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="paket.html">Paket Wisata</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Hubungi Kami</h4>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-info">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/6281999868882?utm_source=website">+62 819-9986-8882</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-info">
+              <strong>Email</strong>
+              <a href="mailto:azizantravellombok@gmail.com">azizantravellombok@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Azizan Travel. Hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- To Top -->
+  <div class="to-top" id="toTop">
+    <button class="to-top-btn" aria-label="Ke atas">⬆</button>
+  </div>
+
+  <!-- WA Float -->
+  <div class="wa-float">
+    <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel&utm_source=website" class="wa-float-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <span class="wa-icon">💬</span>
+      <span>Chat WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">📋 Form Pemesanan</h3>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="namaInput">Nama Lengkap *</label>
+          <input type="text" id="namaInput" placeholder="Masukkan nama lengkap" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="hpInput">No. WhatsApp *</label>
+            <input type="tel" id="hpInput" placeholder="08xxxxxxxxxx" required />
+          </div>
+          <div class="form-group">
+            <label for="jumlahInput">Jumlah Orang *</label>
+            <input type="number" id="jumlahInput" min="1" placeholder="Jumlah peserta" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="paketSelect">Paket yang Diinginkan *</label>
+          <select id="paketSelect" required>
+            <option value="">-- Pilih Paket --</option>
+            <option>Gili Trawangan Full Day</option>
+            <option>Pink Beach & Tanjung Ringgit</option>
+            <option>Trekking Gunung Rinjani 2D1N</option>
+            <option>Airport Transfer BIL Lombok</option>
+            <option>Sewa Avanza / Calya</option>
+            <option>Sewa Xenia</option>
+            <option>Sewa Innova / Zenix</option>
+            <option>Sewa Kendaraan + Driver Harian</option>
+            <option>Lombok Explorer 3D2N</option>
+            <option>Senggigi Sunset & Seafood Tour</option>
+            <option>Paket Honeymoon Lombok 4D3N</option>
+            <option>Paket Custom</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tanggalInput">Tanggal Keberangkatan *</label>
+            <input type="date" id="tanggalInput" required />
+          </div>
+          <div class="form-group">
+            <label for="penjemputanInput">Lokasi Penjemputan</label>
+            <input type="text" id="penjemputanInput" placeholder="Hotel / bandara" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pesanInput">Pesan / Permintaan Khusus</label>
+          <textarea id="pesanInput" placeholder="Ceritakan kebutuhan Anda..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-wa" style="width:100%; justify-content:center;">💬 Kirim via WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV (Mobile) -->
+  <nav class="bottom-nav" aria-label="Navigasi mobile">
+    <div class="bottom-nav-inner">
+      <a href="index.html" class="bottom-nav-item">
+        <span class="bn-icon">🏠</span>
+        <span class="bn-label">Beranda</span>
+      </a>
+      <a href="paket.html" class="bottom-nav-item active">
+        <span class="bn-icon">🗺️</span>
+        <span class="bn-label">Paket</span>
+      </a>
+      <a href="#" class="bottom-nav-item bn-cta" id="bottomNavBooking">
+        <span class="bn-icon">💬</span>
+        <span class="bn-label">Pesan</span>
+      </a>
+      <a href="blog.html" class="bottom-nav-item">
+        <span class="bn-icon">📖</span>
+        <span class="bn-label">Blog</span>
+      </a>
+      <a href="kontak.html" class="bottom-nav-item">
+        <span class="bn-icon">📞</span>
+        <span class="bn-label">Kontak</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="js/blog.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+---
+import Base from '../../layouts/Base.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+const allPosts = (await getCollection('blog'))
+  .filter(p => p.data.slug !== data.slug)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const formattedDate = data.date.toLocaleDateString('id-ID', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+
+<Base
+  title={data.title}
+  description={data.excerpt}
+  pageKey="blog-detail"
+  activePage="blog"
+  ogImage={data.image}
+>
+
+  <section class="blog-detail-section" style="padding: 60px 0 80px;">
+    <div class="container" style="max-width:800px;">
+      <div class="breadcrumb" style="margin-bottom:24px;">
+        <a href="/">Beranda</a>
+        <span>/</span>
+        <a href="/blog">Blog</a>
+        <span>/</span>
+        <span>{data.title}</span>
+      </div>
+
+      <div class="blog-detail-header">
+        <span class="blog-tag">{data.category}</span>
+        <span class="blog-date" style="margin-left:12px;">📅 {formattedDate}</span>
+        <h1 class="blog-detail-title">{data.title}</h1>
+        <p class="blog-detail-excerpt" style="font-size:1.05rem;color:var(--gray);line-height:1.8;margin-bottom:32px;">{data.excerpt}</p>
+      </div>
+
+      <img src={data.image} alt={data.title} class="blog-detail-img" style="width:100%;border-radius:var(--radius-lg);margin-bottom:32px;" />
+
+      <div class="blog-detail-body" style="font-size:1rem;line-height:1.9;color:var(--gray);">
+        <Content />
+      </div>
+
+      <div class="blog-tags" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:40px;padding-top:24px;border-top:1px solid var(--cream-dark);">
+        {data.tags.map(tag => (
+          <span class="tag-pill" style="display:inline-block;padding:6px 16px;background:var(--cream);border-radius:50px;font-size:0.82rem;color:var(--primary);font-family:var(--font-heading);font-weight:500;">#{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {allPosts.length > 0 && (
+    <section class="blog-section" style="padding:0 0 80px;">
+      <div class="container">
+        <h2 class="section-title" style="text-align:center;margin-bottom:48px;">Artikel Terkait</h2>
+        <div class="blog-grid">
+          {allPosts.map(p => (
+            <BlogCard
+              title={p.data.title}
+              slug={p.data.slug}
+              category={p.data.category}
+              date={p.data.date}
+              image={p.data.image}
+              excerpt={p.data.excerpt}
+              tags={p.data.tags}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <style>
+    .blog-detail-body h2 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin: 32px 0 16px;
+    }
+    .blog-detail-body h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--dark);
+      margin: 24px 0 12px;
+    }
+    .blog-detail-body p {
+      margin-bottom: 16px;
+    }
+    .blog-detail-body ul, .blog-detail-body ol {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+    .blog-detail-body li {
+      margin-bottom: 8px;
+    }
+  </style>
+
+</Base>

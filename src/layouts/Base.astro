@@ -1,0 +1,286 @@
+---
+import { CONFIG } from '../data/config';
+import { SEO } from '../data/seo';
+
+export interface Props {
+  title: string;
+  description: string;
+  pageKey?: string;
+  activePage?: string;
+  ogImage?: string;
+}
+
+const { title, description, pageKey = 'home', activePage = 'index', ogImage } = Astro.props;
+const pageUrl = SEO.site.url + Astro.url.pathname;
+const ogImg = ogImage || SEO.site.defaultImage;
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | {SEO.site.name}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={pageUrl} />
+  <meta property="og:image" content={SEO.site.url + ogImg} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={SEO.site.url + ogImg} />
+  <link rel="canonical" href={pageUrl} />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": SEO.organization.name,
+    "description": SEO.organization.description,
+    "url": SEO.organization.url,
+    "telephone": SEO.organization.telephone,
+    "email": SEO.organization.email,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": SEO.organization.address.street,
+      "addressLocality": SEO.organization.address.city,
+      "addressRegion": SEO.organization.address.region,
+      "addressCountry": SEO.organization.address.country
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": SEO.organization.geo.latitude,
+      "longitude": SEO.organization.geo.longitude
+    },
+    "sameAs": [
+      SEO.social.instagram,
+      SEO.social.facebook,
+      SEO.social.tiktok,
+      SEO.social.whatsapp
+    ]
+  })} />
+</head>
+<body>
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <div class="logo-icon">🧭</div>
+        <div class="logo-text">
+          <span class="logo-name">{SEO.site.name}</span>
+          <span class="logo-tagline">{SEO.site.tagline}</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="/" class="nav-link" class:list={{ active: activePage === 'index' }}>Beranda</a></li>
+        <li><a href="/paket" class="nav-link" class:list={{ active: activePage === 'paket' }}>Paket</a></li>
+        <li><a href="/transportasi" class="nav-link" class:list={{ active: activePage === 'transportasi' }}>Transportasi</a></li>
+        <li><a href="/blog" class="nav-link" class:list={{ active: activePage === 'blog' }}>Blog</a></li>
+        <li><a href="/kontak" class="nav-link" class:list={{ active: activePage === 'kontak' }}>Kontak</a></li>
+        <li><a href="#" class="nav-link nav-cta" id="navBooking">Pesan Sekarang</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <slot />
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">🧭</div>
+            <div class="logo-text">
+              <span class="logo-name">{SEO.site.name}</span>
+              <span class="logo-tagline">{SEO.site.tagline}</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Melayani wisata, transportasi, dan keperluan perjalanan Anda di Lombok dengan profesional, nyaman, dan
+            terpercaya sejak 2015.
+          </p>
+          <div class="footer-social">
+            <a href={SEO.social.instagram} class="social-link" aria-label="Instagram" target="_blank" rel="noopener">📸</a>
+            <a href={SEO.social.facebook} class="social-link" aria-label="Facebook" target="_blank" rel="noopener">👍</a>
+            <a href={SEO.social.tiktok} class="social-link" aria-label="TikTok" target="_blank" rel="noopener">🎵</a>
+            <a href={SEO.social.whatsapp + '?utm_source=website'} class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener">💬</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Layanan Kami</h4>
+          <ul class="footer-links">
+            <li><a href="/paket">Paket Wisata Lombok</a></li>
+            <li><a href="/transportasi">Sewa Kendaraan</a></li>
+            <li><a href="/transportasi">Airport Transfer</a></li>
+            <li><a href="/paket">Trekking Rinjani</a></li>
+            <li><a href="/paket">Wisata Gili Islands</a></li>
+            <li><a href="/paket">Paket Honeymoon</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="/">Beranda</a></li>
+            <li><a href="/paket">Paket</a></li>
+            <li><a href="/transportasi">Transportasi</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/kontak">Kontak & Lokasi</a></li>
+            <li><a href="#" id="openBookingModal">Pesan Sekarang</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Hubungi Kami</h4>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-info">
+              <strong>Alamat</strong>
+              {CONFIG.address}<br />
+              Nusa Tenggara Barat
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-info">
+              <strong>WhatsApp / Telepon</strong>
+              <a href={`https://wa.me/${CONFIG.waNumber}?utm_source=website`}>+62 819-9986-8882</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-info">
+              <strong>Email</strong>
+              <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="copyrightYear">2025</span> {SEO.site.name}. Hak cipta dilindungi undang-undang.</p>
+        <p>Dibuat dengan ❤️ untuk wisatawan Lombok</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== BOOKING MODAL ====== -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">📋 Form Pemesanan</h3>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="namaInput">Nama Lengkap *</label>
+          <input type="text" id="namaInput" placeholder="Masukkan nama lengkap Anda" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="hpInput">No. WhatsApp *</label>
+            <input type="tel" id="hpInput" placeholder="08xxxxxxxxxx" required />
+          </div>
+          <div class="form-group">
+            <label for="jumlahInput">Jumlah Orang *</label>
+            <input type="number" id="jumlahInput" min="1" placeholder="Jumlah peserta" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="paketSelect">Paket yang Diinginkan *</label>
+          <select id="paketSelect" required>
+            <option value="">-- Pilih Paket --</option>
+            <option value="Gili Trawangan Full Day">Gili Trawangan Full Day</option>
+            <option value="Pink Beach & Tanjung Ringgit">Pink Beach & Tanjung Ringgit</option>
+            <option value="Trekking Gunung Rinjani">Trekking Gunung Rinjani</option>
+            <option value="Lombok Explorer 3D2N">Lombok Explorer 3D2N</option>
+            <option value="Senggigi Sunset & Seafood Tour">Senggigi Sunset & Seafood Tour</option>
+            <option value="Paket Honeymoon Lombok 4D3N">Paket Honeymoon Lombok 4D3N</option>
+            <option value="Sewa Avanza/Calya">Sewa Avanza / Calya</option>
+            <option value="Sewa Xenia">Sewa Xenia</option>
+            <option value="Sewa Innova/Zenix">Sewa Innova / Zenix</option>
+            <option value="Sewa Kendaraan + Driver Harian">Sewa Kendaraan + Driver Harian</option>
+            <option value="Airport Transfer BIL">Airport Transfer BIL</option>
+            <option value="Paket Custom">Paket Custom / Lainnya</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tanggalInput">Tanggal Keberangkatan *</label>
+            <input type="date" id="tanggalInput" required />
+          </div>
+          <div class="form-group">
+            <label for="penjemputanInput">Lokasi Penjemputan</label>
+            <input type="text" id="penjemputanInput" placeholder="Hotel / bandara / alamat" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pesanInput">Pesan / Permintaan Khusus</label>
+          <textarea id="pesanInput" placeholder="Contoh: ada bayi, butuh kursi tambahan, dll."></textarea>
+        </div>
+        <button type="submit" class="btn btn-wa" style="width:100%; justify-content:center; font-size:1rem;">
+          💬 Kirim via WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====== TO TOP BUTTON ====== -->
+  <div class="to-top" id="toTop">
+    <button class="to-top-btn" aria-label="Ke atas">⬆</button>
+  </div>
+
+  <!-- ====== WA FLOAT BUTTON ====== -->
+  <div class="wa-float">
+    <a href={`https://wa.me/${CONFIG.waNumber}?text=Halo%20${encodeURIComponent(SEO.site.name)}%2C%20saya%20ingin%20informasi%20lebih%20lanjut&utm_source=website`}
+      class="wa-float-btn" target="_blank" rel="noopener" id="waFloatBtn" aria-label="WhatsApp Azizan Travel">
+      <span class="wa-icon">💬</span>
+      <span>Chat WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- ====== BOTTOM NAV (Mobile) ====== -->
+  <nav class="bottom-nav" aria-label="Navigasi mobile">
+    <div class="bottom-nav-inner">
+      <a href="/" class="bottom-nav-item" class:list={{ active: activePage === 'index' }}>
+        <span class="bn-icon">🏠</span>
+        <span class="bn-label">Beranda</span>
+      </a>
+      <a href="/paket" class="bottom-nav-item" class:list={{ active: activePage === 'paket' }}>
+        <span class="bn-icon">🗺️</span>
+        <span class="bn-label">Paket</span>
+      </a>
+      <a href="#" class="bottom-nav-item bn-cta" id="bottomNavBooking">
+        <span class="bn-icon">💬</span>
+        <span class="bn-label">Pesan</span>
+      </a>
+      <a href="/blog" class="bottom-nav-item" class:list={{ active: activePage === 'blog' }}>
+        <span class="bn-icon">📖</span>
+        <span class="bn-label">Blog</span>
+      </a>
+      <a href="/kontak" class="bottom-nav-item" class:list={{ active: activePage === 'kontak' }}>
+        <span class="bn-icon">📞</span>
+        <span class="bn-label">Kontak</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Scripts -->
+  <script>
+    // === CONFIG ===
+    const CONFIG = {
+      waNumber: '{CONFIG.waNumber}',
+      businessName: '{SEO.site.name}',
+      address: `{CONFIG.address}`,
+      email: '{CONFIG.email}'
+    };
+  </script>
+  <script is:inline src="/js/main.js"></script>
+</body>
+</html>

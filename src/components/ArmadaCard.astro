@@ -1,0 +1,46 @@
+---
+export interface Props {
+  title: string;
+  slug: string;
+  image: string;
+  badge?: string;
+  category: string;
+  capacity: string;
+  luggage: string;
+  price: string;
+  pricePer: string;
+  includes: string[];
+  description: string;
+}
+
+const { title, image, badge, category, capacity, luggage, price, pricePer, includes, description } = Astro.props;
+---
+
+<div class="package-card reveal" data-category="transport">
+  <div class="card-image">
+    <img src={image} alt={title} loading="lazy" />
+    {badge && badge.includes('Ekonomis') && <div class="card-badge">🚗 Ekonomis</div>}
+    {badge && badge.includes('Hemat') && <div class="card-badge">💰 Hemat Budget</div>}
+    {badge && badge.includes('Premium') && <div class="card-badge popular">⭐ Premium</div>}
+  </div>
+  <div class="card-body">
+    <div class="card-category">{category}</div>
+    <h3 class="card-title">{title}</h3>
+    <div class="card-meta">
+      <span class="meta-item">👥 {capacity}</span>
+      <span class="meta-item">🧳 {luggage}</span>
+    </div>
+    <p class="card-desc">{description}</p>
+    <ul class="paket-include-list">
+      {includes.map(item => <li>✅ {item}</li>)}
+    </ul>
+    <div class="card-footer">
+      <div class="card-price">
+        <span class="price-from">mulai dari</span>
+        <span class="price-amount">{price}</span>
+        <span class="price-per">/{pricePer}</span>
+      </div>
+      <a href="#" class="card-btn book-btn" data-package={title}>📩 Pesan</a>
+    </div>
+  </div>
+</div>

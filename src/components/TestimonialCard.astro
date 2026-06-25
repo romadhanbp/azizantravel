@@ -1,0 +1,24 @@
+---
+export interface Props {
+  name: string;
+  origin: string;
+  text: string;
+  rating: number;
+  avatar: string;
+}
+
+const { name, origin, text, rating, avatar } = Astro.props;
+const stars = '⭐'.repeat(rating);
+---
+
+<div class="testi-card reveal">
+  <div class="testi-stars">{stars}</div>
+  <p class="testi-text">"{text}"</p>
+  <div class="testi-author">
+    <div class="testi-avatar">{avatar}</div>
+    <div class="testi-info">
+      <div class="name">{name}</div>
+      <div class="origin">{origin}</div>
+    </div>
+  </div>
+</div>

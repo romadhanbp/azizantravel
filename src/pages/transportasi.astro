@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import ArmadaCard from '../components/ArmadaCard.astro';
+import { getCollection } from 'astro:content';
+
+const armada = (await getCollection('armada'))
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+---
+
+<Base title="Transportasi & Rental Mobil Lombok" description="Pilih armada kendaraan Azizan Travel: Avanza, Xenia, Innova. Driver profesional, harga transparan, siap Jemput di hotel." activePage="transportasi">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Beranda</a>
+        <span>/</span>
+        <span>Transportasi</span>
+      </div>
+      <span class="section-tag">Transportasi</span>
+      <h1 class="section-title">Kendaraan & Rental Mobil Lombok</h1>
+      <p>Pilih kendaraan sesuai kebutuhan perjalanan Anda. Semua dalam kondisi prima, ber-AC, dan siap melayani.</p>
+    </div>
+  </section>
+
+  <section class="paket-section">
+    <div class="container">
+      <div class="paket-all-grid">
+        {armada.map(a => (
+          <ArmadaCard
+            title={a.data.title}
+            slug={a.data.slug}
+            image={a.data.image}
+            badge={a.data.badge}
+            category={a.data.category}
+            capacity={a.data.capacity}
+            luggage={a.data.luggage}
+            price={a.data.price}
+            pricePer={a.data.pricePer}
+            includes={a.data.includes}
+            description={a.data.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2 class="section-title">Butuh Jenis Kendaraan Lain? 🤔</h2>
+          <p>Kami juga menyediakan kendaraan jenis lain berdasarkan permintaan. Hubungi kami untuk konsultasi gratis.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-white" id="openBookingModal">📋 Konsultasi Sekarang</a>
+          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20saya%20ingin%20tanya%20armada&utm_source=website" class="btn btn-wa" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

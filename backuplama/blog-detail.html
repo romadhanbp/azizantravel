@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artikel Blog - Azizan Travel</title>
+  <meta name="description" content="Baca artikel wisata Lombok lengkap dari Azizan Travel. Tips perjalanan, panduan destinasi, dan inspirasi wisata Lombok terkini." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>" />
+  <script src="js/seo-config.js"></script>
+  <style>
+    .blog-detail-section { padding: 60px 0 80px; }
+
+    .blog-detail-container {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    .blog-detail-header { margin-bottom: 28px; }
+
+    .blog-detail-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--dark);
+      margin: 16px 0 12px;
+      line-height: 1.3;
+    }
+
+    .blog-detail-excerpt {
+      font-size: 1.05rem;
+      color: var(--gray);
+      line-height: 1.8;
+      border-left: 4px solid var(--primary);
+      padding-left: 16px;
+    }
+
+    .blog-detail-img {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      max-height: 420px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .blog-detail-body {
+      font-size: 1rem;
+      color: #374151;
+      line-height: 1.9;
+    }
+
+    .blog-detail-body h2 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 28px 0 12px;
+    }
+
+    .blog-detail-body p { margin-bottom: 16px; }
+
+    .blog-detail-body ul {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .blog-detail-body ul li { margin-bottom: 8px; color: #374151; }
+
+    .blog-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .tag-pill {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      color: var(--gray);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-family: var(--font-heading);
+      font-weight: 500;
+    }
+
+    /* Sidebar */
+    .blog-sidebar { position: sticky; top: 100px; }
+
+    .sidebar-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid var(--cream-dark);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dark);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .related-section { padding: 60px 0; background: var(--cream); }
+
+    #relatedGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 1024px) {
+      .blog-detail-container { grid-template-columns: 1fr; }
+      .blog-sidebar { position: static; }
+      #relatedGrid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      #relatedGrid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🧭</div>
+        <div class="logo-text">
+          <span class="logo-name">Azizan Travel</span>
+          <span class="logo-tagline">Explore Lombok</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">Beranda</a></li>
+        <li><a href="paket.html" class="nav-link">Paket Wisata</a></li>
+        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+        <li><a href="paket.html" class="nav-link nav-cta">Pesan Sekarang</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" style="padding: 120px 0 40px;">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Beranda</a>
+        <span>/</span>
+        <a href="blog.html">Blog</a>
+        <span>/</span>
+        <span>Artikel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG DETAIL -->
+  <section class="blog-detail-section">
+    <div class="container">
+      <div class="blog-detail-container">
+        <div class="blog-detail-main" id="blogDetailContent">
+          <!-- Rendered by blog.js -->
+          <div style="text-align:center; padding: 60px 20px; color: var(--gray);">
+            <div style="font-size:3rem; margin-bottom:16px;">📄</div>
+            <p>Memuat artikel...</p>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="blog-sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">🌴 Pesan Paket Wisata</h3>
+            <p style="font-size:0.88rem; color:var(--gray); margin-bottom:16px; line-height:1.7;">
+              Tertarik wisata ke Lombok? Hubungi kami sekarang untuk penawaran terbaik!
+            </p>
+            <a href="paket.html" class="btn btn-primary" style="width:100%; justify-content:center; margin-bottom:10px;">🗺️ Lihat Paket</a>
+            <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel&utm_source=website" class="btn btn-wa" style="width:100%; justify-content:center;" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">📱 Kontak Cepat</h3>
+            <div class="contact-item" style="background:none; padding:0; border:none; box-shadow:none; margin-bottom:10px;">
+              <div class="contact-icon" style="width:36px; height:36px; font-size:1rem;">📱</div>
+              <div class="contact-info">
+                <strong style="color:var(--dark);">WhatsApp</strong>
+                <a href="https://wa.me/6281999868882?utm_source=website" style="color:var(--primary);">+62 819-9986-8882</a>
+              </div>
+            </div>
+            <div class="contact-item" style="background:none; padding:0; border:none; box-shadow:none;">
+              <div class="contact-icon" style="width:36px; height:36px; font-size:1rem;">📧</div>
+              <div class="contact-info">
+                <strong style="color:var(--dark);">Email</strong>
+                <a href="mailto:azizantravellombok@gmail.com" style="color:var(--primary);">azizantravellombok@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">📖 Artikel Lainnya</h3>
+            <ul class="footer-links" id="sidebarRelated">
+              <!-- Will be rendered by JS -->
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED POSTS -->
+  <section class="related-section">
+    <div class="container">
+      <h2 class="section-title">Artikel Terkait</h2>
+      <div id="relatedGrid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">🧭</div>
+            <div class="logo-text">
+              <span class="logo-name">Azizan Travel</span>
+              <span class="logo-tagline">Explore Lombok</span>
+            </div>
+          </div>
+          <p class="footer-desc">Melayani wisata dan transportasi Lombok dengan profesional dan terpercaya.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Layanan</h4>
+          <ul class="footer-links">
+            <li><a href="paket.html">Paket Wisata</a></li>
+            <li><a href="paket.html">Airport Transfer</a></li>
+            <li><a href="paket.html">Sewa Kendaraan</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="paket.html">Paket</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Kontak</h4>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-info">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/6281999868882?utm_source=website">+62 819-9986-8882</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Azizan Travel. Hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="to-top" id="toTop">
+    <button class="to-top-btn" aria-label="Ke atas">⬆</button>
+  </div>
+
+  <div class="wa-float">
+    <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel&utm_source=website" class="wa-float-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <span class="wa-icon">💬</span>
+      <span>Chat WhatsApp</span>
+    </a>
+  </div>
+
+  <script src="js/blog.js"></script>
+  <script>
+    // Render sidebar related
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('sidebarRelated');
+      if (sidebar && typeof blogPosts !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentId = parseInt(urlParams.get('id'));
+        const related = blogPosts.filter(p => p.id !== currentId).slice(0, 4);
+        sidebar.innerHTML = related.map(p =>
+          `<li><a href="blog-detail.html?id=${p.id}">${p.title}</a></li>`
+        ).join('');
+      }
+    });
+  </script>
+
+  <!-- BOTTOM NAV (Mobile) -->
+  <nav class="bottom-nav" aria-label="Navigasi mobile">
+    <div class="bottom-nav-inner">
+      <a href="index.html" class="bottom-nav-item">
+        <span class="bn-icon">🏠</span>
+        <span class="bn-label">Beranda</span>
+      </a>
+      <a href="paket.html" class="bottom-nav-item">
+        <span class="bn-icon">🗺️</span>
+        <span class="bn-label">Paket</span>
+      </a>
+      <a href="#" class="bottom-nav-item bn-cta" id="bottomNavBooking">
+        <span class="bn-icon">💬</span>
+        <span class="bn-label">Pesan</span>
+      </a>
+      <a href="blog.html" class="bottom-nav-item active">
+        <span class="bn-icon">📖</span>
+        <span class="bn-label">Blog</span>
+      </a>
+      <a href="kontak.html" class="bottom-nav-item">
+        <span class="bn-icon">📞</span>
+        <span class="bn-label">Kontak</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

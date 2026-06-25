@@ -1,0 +1,86 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: public/img
+public_folder: /img
+
+site_url: https://azizantravel.com
+logo_url: /img/hero-lombok.jpg
+
+collections:
+  - name: packages
+    label: Paket Wisata
+    label_singular: Paket
+    folder: src/content/packages
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{price}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: [ "^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan tanda strip" ] }
+      - { label: Kategori, name: category, widget: select, options: [wisata, petualangan, bisnis] }
+      - { label: Gambar, name: image, widget: image, default: "/img/paket-wisata.jpg" }
+      - { label: Badge, name: badge, widget: string, required: false }
+      - { label: Durasi, name: duration, widget: string }
+      - { label: Maks Grup, name: maxGroup, widget: number, required: false, value_type: int }
+      - { label: Kapasitas, name: capacity, widget: string, required: false }
+      - { label: Bagasi, name: luggage, widget: string, required: false }
+      - { label: Harga, name: price, widget: string }
+      - { label: Harga Per, name: pricePer, widget: string }
+      - { label: Termasuk, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
+      - { label: Deskripsi, name: description, widget: text }
+      - { label: Unggulan, name: featured, widget: boolean, default: false, required: false }
+      - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }
+
+  - name: armada
+    label: Armada / Transportasi
+    label_singular: Kendaraan
+    folder: src/content/armada
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{price}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: [ "^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan tanda strip" ] }
+      - { label: Gambar, name: image, widget: image, default: "/img/transport-bisnis.jpg" }
+      - { label: Badge, name: badge, widget: string, required: false }
+      - { label: Kategori, name: category, widget: string }
+      - { label: Kapasitas, name: capacity, widget: string }
+      - { label: Bagasi, name: luggage, widget: string }
+      - { label: Harga, name: price, widget: string }
+      - { label: Harga Per, name: pricePer, widget: string }
+      - { label: Termasuk, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
+      - { label: Deskripsi, name: description, widget: text }
+      - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }
+
+  - name: blog
+    label: Blog / Artikel
+    label_singular: Artikel
+    folder: src/content/blog
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: [ "^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan tanda strip" ] }
+      - { label: Kategori, name: category, widget: string }
+      - { label: Tanggal, name: date, widget: date, format: "YYYY-MM-DD" }
+      - { label: Gambar, name: image, widget: image, default: "/img/hero-lombok.jpg" }
+      - { label: Excerpt, name: excerpt, widget: text }
+      - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+      - { label: Konten, name: body, widget: markdown }

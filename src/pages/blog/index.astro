@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const blogPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Blog - Tips & Panduan Wisata Lombok" description="Baca artikel, tips, dan panduan wisata Lombok terbaru. Inspirasi perjalanan dari Azizan Travel." activePage="blog">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Beranda</a>
+        <span>/</span>
+        <span>Blog</span>
+      </div>
+      <span class="section-tag">Blog & Tips</span>
+      <h1 class="section-title">Inspirasi Perjalanan Lombok</h1>
+      <p>Tips, panduan, dan cerita seru seputar wisata Lombok untuk perjalanan Anda.</p>
+    </div>
+  </section>
+
+  <section class="blog-section" style="padding: 60px 0 80px;">
+    <div class="container">
+      <div class="blog-grid" id="blogListGrid">
+        {blogPosts.map(p => (
+          <BlogCard
+            title={p.data.title}
+            slug={p.data.slug}
+            category={p.data.category}
+            date={p.data.date}
+            image={p.data.image}
+            excerpt={p.data.excerpt}
+            tags={p.data.tags}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Base>

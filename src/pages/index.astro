@@ -1,0 +1,280 @@
+---
+import Base from '../layouts/Base.astro';
+import PackageCard from '../components/PackageCard.astro';
+import ArmadaCard from '../components/ArmadaCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import { testimonials } from '../data/testimonials';
+import { getCollection } from 'astro:content';
+
+const packages = (await getCollection('packages'))
+  .filter(p => p.data.featured && p.data.category !== 'custom')
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const armada = (await getCollection('armada'))
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const blogPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<Base title="Azizan Travel - Paket Wisata & Transportasi Lombok Terpercaya" description="Azizan Travel melayani paket wisata Lombok, transportasi airport, sewa kendaraan, dan keperluan perjalanan selama di Lombok. Profesional, nyaman, harga terjangkau." activePage="index">
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="beranda">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>🏝️</span> #1 Travel Agency di Lombok
+        </div>
+        <h1 class="hero-title">
+          Jelajahi <span class="highlight">Keindahan</span><br />
+          Lombok Bersama Kami
+        </h1>
+        <p class="hero-desc">
+          Dari pantai eksotis hingga puncak Rinjani, kami siap menjadi teman perjalanan terbaik Anda. Paket wisata,
+          airport transfer, dan transportasi profesional.
+        </p>
+        <div class="hero-actions">
+          <a href="/paket" class="btn btn-primary">🗺️ Lihat Paket</a>
+          <a href="#" class="btn btn-white" id="heroBooking">📞 Pesan Sekarang</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Pelanggan Puas</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Destinasi</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5★</div>
+            <div class="stat-label">Rating Google</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ====== WHY CHOOSE US ====== -->
+  <section class="why-us" id="tentang">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-image reveal">
+          <img src="/img/transport-bisnis.jpg" alt="Armada Azizan Travel Lombok" loading="lazy" />
+          <div class="why-badge">
+            <div class="why-badge-icon">🏆</div>
+            <div class="why-badge-text">
+              <div class="number">10+ Tahun</div>
+              <small>Pengalaman di Lombok</small>
+            </div>
+          </div>
+        </div>
+        <div class="why-text reveal">
+          <span class="section-tag">Mengapa Kami?</span>
+          <h2 class="section-title">Perjalanan Nyaman<br />Dimulai dari Sini</h2>
+          <p class="section-subtitle">
+            Kami bukan hanya menyediakan kendaraan — kami menghadirkan pengalaman perjalanan yang tak terlupakan di
+            Lombok. Driver kami berpengalaman, kendaraan terawat, dan siap melayani 24 jam.
+          </p>
+          <div class="why-features">
+            <div class="feature-item">
+              <div class="feature-icon">🚗</div>
+              <div class="feature-text">
+                <h4>Armada Lengkap & Terawat</h4>
+                <p>Pilihan kendaraan dari sedan, SUV, hingga minibus. Semua dalam kondisi prima dan ber-AC.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">👨‍✈️</div>
+              <div class="feature-text">
+                <h4>Driver Lokal Berpengalaman</h4>
+                <p>Driver kami adalah warga lokal Lombok yang hafal rute, budaya, dan destinasi terbaik.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">💎</div>
+              <div class="feature-text">
+                <h4>Harga Transparan</h4>
+                <p>Tidak ada biaya tersembunyi. Semua harga sudah termasuk bensin, parkir, dan retribusi.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">📱</div>
+              <div class="feature-text">
+                <h4>Booking Mudah via WhatsApp</h4>
+                <p>Pesan kapan saja, konfirmasi cepat. Kami siap merespons dalam hitungan menit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TRANSPORT ====== -->
+  <section class="transport" id="transport">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Layanan Transportasi</span>
+        <h2 class="section-title">Transportasi & Rental Mobil Lombok</h2>
+        <p class="section-subtitle">Mobil terawat, driver ramah, harga bersahabat. Pilih armada sesuai kebutuhan Anda.</p>
+      </div>
+      <div class="transport-grid">
+        {armada.map(a => (
+          <ArmadaCard
+            title={a.data.title}
+            slug={a.data.slug}
+            image={a.data.image}
+            badge={a.data.badge}
+            category={a.data.category}
+            capacity={a.data.capacity}
+            luggage={a.data.luggage}
+            price={a.data.price}
+            pricePer={a.data.pricePer}
+            includes={a.data.includes}
+            description={a.data.description}
+          />
+        ))}
+      </div>
+      <div class="text-center" style="margin-top: 40px;">
+        <a href="/transportasi" class="btn btn-outline">Lihat Semua Transportasi →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PACKAGES ====== -->
+  <section class="packages" id="paket">
+    <div class="container">
+      <div class="packages-header">
+        <div>
+          <span class="section-tag">Paket Unggulan</span>
+          <h2 class="section-title">Pilih Petualangan Anda</h2>
+        </div>
+      </div>
+      <div class="packages-grid" id="packagesGrid">
+        {packages.map(p => (
+          <PackageCard
+            title={p.data.title}
+            slug={p.data.slug}
+            category={p.data.category}
+            image={p.data.image}
+            badge={p.data.badge}
+            duration={p.data.duration}
+            maxGroup={p.data.maxGroup}
+            price={p.data.price}
+            pricePer={p.data.pricePer}
+            includes={p.data.includes}
+            description={p.data.description}
+          />
+        ))}
+      </div>
+      <div class="text-center" style="margin-top: 40px;">
+        <a href="/paket" class="btn btn-outline">Lihat Semua Paket →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== GALLERY ====== -->
+  <section class="gallery" id="galeri">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Galeri Lombok</span>
+        <h2 class="section-title">Destinasi Impian Anda</h2>
+        <p class="section-subtitle">Ribuan kenangan indah telah kami ciptakan bersama pelanggan kami di Lombok.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="/img/hero-lombok.jpg" alt="Pantai Lombok" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-label">Pantai Lombok</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="/img/gili-trawangan.jpg" alt="Gili Trawangan" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-label">Gili Trawangan</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="/img/rinjani-trekking.jpg" alt="Gunung Rinjani" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-label">Gunung Rinjani</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="/img/pink-beach.jpg" alt="Pink Beach" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-label">Pink Beach</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="/img/paket-wisata.jpg" alt="Wisata Lombok" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-label">Wisata Lombok</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TESTIMONIALS ====== -->
+  <section class="testimonials" id="testimoni">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Testimoni</span>
+        <h2 class="section-title">Kata Mereka Tentang Kami</h2>
+      </div>
+      <div class="testi-slider">
+        {testimonials.map(t => (
+          <TestimonialCard name={t.name} origin={t.origin} text={t.text} rating={t.rating} avatar={t.avatar} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA BANNER ====== -->
+  <section class="cta-banner" id="booking">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2 class="section-title">Siap Jelajahi Lombok? 🌴</h2>
+          <p>Hubungi kami sekarang dan dapatkan penawaran terbaik. Respon cepat dalam hitungan menit.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-white" id="openBookingModal">📋 Isi Form Booking</a>
+          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20saya%20ingin%20pesan%20paket%20wisata%20Lombok&utm_source=website"
+            class="btn btn-wa" target="_blank" rel="noopener">
+            💬 WhatsApp Kami
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== BLOG SECTION ====== -->
+  <section class="blog" id="blog">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Blog & Tips</span>
+        <h2 class="section-title">Inspirasi Perjalanan Lombok</h2>
+        <p class="section-subtitle">Tips, panduan, dan cerita seru seputar wisata Lombok untuk perjalanan Anda.</p>
+      </div>
+      <div class="blog-grid" id="blogGrid">
+        {blogPosts.map(p => (
+          <BlogCard
+            title={p.data.title}
+            slug={p.data.slug}
+            category={p.data.category}
+            date={p.data.date}
+            image={p.data.image}
+            excerpt={p.data.excerpt}
+            tags={p.data.tags}
+            layout="home"
+          />
+        ))}
+      </div>
+      <div class="text-center" style="margin-top: 40px;">
+        <a href="/blog" class="btn btn-outline">Lihat Semua Artikel →</a>
+      </div>
+    </div>
+  </section>
+
+</Base>

@@ -1,0 +1,30 @@
+---
+export interface Props {
+  title: string;
+  slug: string;
+  category: string;
+  date: Date;
+  image: string;
+  excerpt: string;
+  tags: string[];
+  layout?: 'home' | 'list';
+}
+
+const { title, slug, category, date, image, excerpt, layout = 'list' } = Astro.props;
+const formattedDate = date.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<div class="blog-card reveal" data-category={category}>
+  <div class="blog-thumb">
+    <img src={image} alt={title} loading="lazy" />
+  </div>
+  <div class="blog-body">
+    <div class="blog-meta">
+      <span class="blog-tag">{category}</span>
+      <span class="blog-date">📅 {formattedDate}</span>
+    </div>
+    <h3 class="blog-title">{title}</h3>
+    <p class="blog-excerpt">{excerpt}</p>
+    <a href={`/blog/${slug}`} class="blog-link">Baca Selengkapnya →</a>
+  </div>
+</div>
