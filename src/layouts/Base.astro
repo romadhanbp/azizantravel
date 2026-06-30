@@ -8,9 +8,10 @@ export interface Props {
   pageKey?: string;
   activePage?: string;
   ogImage?: string;
+  navbarStyle?: 'transparent' | 'solid';
 }
 
-const { title, description, pageKey = 'home', activePage = 'index', ogImage } = Astro.props;
+const { title, description, pageKey = 'home', activePage = 'index', ogImage, navbarStyle = 'transparent' } = Astro.props;
 const pageUrl = SEO.site.url + Astro.url.pathname;
 const ogImg = ogImage || SEO.site.defaultImage;
 ---
@@ -66,7 +67,7 @@ const ogImg = ogImage || SEO.site.defaultImage;
 </head>
 <body>
   <!-- ====== NAVBAR ====== -->
-  <nav class="navbar" id="navbar">
+  <nav class:list={['navbar', { 'navbar-solid': navbarStyle === 'solid' }]} id="navbar">
     <div class="nav-container">
       <a href="/" class="nav-logo">
         <div class="logo-icon">🧭</div>

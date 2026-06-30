@@ -10,13 +10,36 @@ const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
 
+let lastScrollY = 0;
+let scrollDirection = 'up';
+
 window.addEventListener('scroll', () => {
   if (navbar) {
-    if (window.scrollY > 50) {
+    const currentScrollY = window.scrollY;
+    
+    // Add scrolled class for background
+    if (currentScrollY > 50) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
+    
+    // Auto-hide: hide on scroll down, show on scroll up
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      // Scrolling down & past header
+      if (scrollDirection !== 'down') {
+        navbar.classList.add('navbar-hidden');
+        scrollDirection = 'down';
+      }
+    } else {
+      // Scrolling up
+      if (scrollDirection !== 'up') {
+        navbar.classList.remove('navbar-hidden');
+        scrollDirection = 'up';
+      }
+    }
+    
+    lastScrollY = currentScrollY;
   }
 });
 
