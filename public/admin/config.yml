@@ -82,3 +82,71 @@ collections:
       - { label: Excerpt, name: excerpt, widget: text }
       - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
       - { label: Konten, name: body, widget: markdown }
+
+  - name: homepage
+    label: Homepage Sections
+    label_singular: Section
+    folder: src/content/homepage
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{section}}"
+    summary: "{{section}}"
+    sortable_fields: [section]
+    fields:
+      - { label: Section ID, name: section, widget: string, pattern: ["^[a-z-]+$", "Hanya huruf kecil dan strip"] }
+      - { label: Tag/Label, name: tag, widget: string, required: false }
+      - { label: Judul, name: title, widget: string, required: false }
+      - { label: Kata Highlight, name: highlightWord, widget: string, required: false }
+      - { label: Deskripsi, name: description, widget: text, required: false }
+      - { label: Badge Text, name: badge, widget: string, required: false }
+      - { label: Badge Icon, name: badgeIcon, widget: string, required: false }
+      - { label: Badge Number, name: badgeNumber, widget: string, required: false }
+      - { label: Badge Text, name: badgeText, widget: string, required: false }
+      - { label: Gambar, name: image, widget: image, required: false }
+      - { label: Tombol Utama, name: buttonPrimary, widget: string, required: false }
+      - { label: Link Tombol Utama, name: buttonPrimaryLink, widget: string, required: false }
+      - { label: Tombol Kedua, name: buttonSecondary, widget: string, required: false }
+      - { label: Link Tombol Kedua, name: buttonSecondaryLink, widget: string, required: false }
+      - label: Stats
+        name: stats
+        widget: list
+        required: false
+        fields:
+          - { label: Angka, name: number, widget: string }
+          - { label: Label, name: label, widget: string }
+      - label: Features
+        name: features
+        widget: list
+        required: false
+        fields:
+          - { label: Icon, name: icon, widget: string }
+          - { label: Judul, name: title, widget: string }
+          - { label: Deskripsi, name: description, widget: text }
+      - label: Items (Galeri)
+        name: items
+        widget: list
+        required: false
+        fields:
+          - { label: Gambar, name: image, widget: image }
+          - { label: Label, name: label, widget: string }
+
+  - name: testimonials
+    label: Testimoni
+    label_singular: Testimoni
+    folder: src/content/testimonials
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{name}}"
+    summary: "{{name}} — {{origin}}"
+    sortable_fields: [order, name]
+    fields:
+      - { label: Nama, name: name, widget: string }
+      - { label: Asal, name: origin, widget: string }
+      - { label: Testimoni, name: text, widget: text }
+      - { label: Rating, name: rating, widget: number, min: 1, max: 5 }
+      - { label: Avatar (inisial), name: avatar, widget: string }
+      - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }

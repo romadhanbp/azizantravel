@@ -4,7 +4,6 @@ import PackageCard from '../components/PackageCard.astro';
 import TransportCard from '../components/TransportCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
-import { testimonials } from '../data/testimonials';
 import { getCollection } from 'astro:content';
 
 const packages = (await getCollection('packages'))
@@ -17,6 +16,20 @@ const transport = (await getCollection('transport'))
 const blogPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
+
+const homepageSections = await getCollection('homepage');
+const getSection = (name) => homepageSections.find(s => s.data.section === name)?.data || {};
+
+const hero = getSection('hero');
+const whyUs = getSection('why-us');
+const cta = getSection('cta');
+const gallery = getSection('gallery');
+const transportHeader = getSection('transport-header');
+const packagesHeader = getSection('packages-header');
+const blogHeader = getSection('blog-header');
+
+const testimonials = (await getCollection('testimonials'))
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 ---
 
 <Base title="Azizan Travel - Paket Wisata & Transportasi Lombok Terpercaya" description="Azizan Travel melayani paket wisata Lombok, transportasi airport, sewa kendaraan, dan keperluan perjalanan selama di Lombok. Profesional, nyaman, harga terjangkau." activePage="index">
@@ -27,33 +40,26 @@ const blogPosts = (await getCollection('blog'))
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge">
-          <span>🏝️</span> #1 Travel Agency di Lombok
+          <span>{hero.badgeIcon}</span> {hero.badge}
         </div>
         <h1 class="hero-title">
-          Jelajahi <span class="highlight">Keindahan</span><br />
+          Jelajahi <span class="highlight">{hero.highlightWord}</span><br />
           Lombok Bersama Kami
         </h1>
         <p class="hero-desc">
-          Dari pantai eksotis hingga puncak Rinjani, kami siap menjadi teman perjalanan terbaik Anda. Paket wisata,
-          airport transfer, dan transportasi profesional.
+          {hero.description}
         </p>
         <div class="hero-actions">
-          <a href="/paket" class="btn btn-primary">🗺️ Lihat Paket</a>
-          <a href="#" class="btn btn-white" id="heroBooking">📞 Pesan Sekarang</a>
+          <a href={hero.buttonPrimaryLink} class="btn btn-primary">{hero.buttonPrimary}</a>
+          <a href={hero.buttonSecondaryLink} class="btn btn-white" id="heroBooking">{hero.buttonSecondary}</a>
         </div>
         <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Pelanggan Puas</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">Destinasi</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">5★</div>
-            <div class="stat-label">Rating Google</div>
-          </div>
+          {hero.stats?.map(stat => (
+            <div class="stat-item">
+              <div class="stat-number">{stat.number}</div>
+              <div class="stat-label">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -68,51 +74,31 @@ const blogPosts = (await getCollection('blog'))
     <div class="container">
       <div class="why-grid">
         <div class="why-image reveal">
-          <img src="/img/transport-bisnis.jpg" alt="Armada Azizan Travel Lombok" loading="lazy" />
+          <img src={whyUs.image} alt="Azizan Travel Lombok" loading="lazy" />
           <div class="why-badge">
-            <div class="why-badge-icon">🏆</div>
+            <div class="why-badge-icon">{whyUs.badgeIcon}</div>
             <div class="why-badge-text">
-              <div class="number">10+ Tahun</div>
-              <small>Pengalaman di Lombok</small>
+              <div class="number">{whyUs.badgeNumber}</div>
+              <small>{whyUs.badgeText}</small>
             </div>
           </div>
         </div>
         <div class="why-text reveal">
-          <span class="section-tag">Mengapa Kami?</span>
-          <h2 class="section-title">Perjalanan Nyaman<br />Dimulai dari Sini</h2>
+          <span class="section-tag">{whyUs.tag}</span>
+          <h2 class="section-title">{whyUs.title}</h2>
           <p class="section-subtitle">
-            Kami bukan hanya menyediakan kendaraan — kami menghadirkan pengalaman perjalanan yang tak terlupakan di
-            Lombok. Driver kami berpengalaman, kendaraan terawat, dan siap melayani 24 jam.
+            {whyUs.description}
           </p>
           <div class="why-features">
-            <div class="feature-item">
-              <div class="feature-icon">🚗</div>
-              <div class="feature-text">
-                <h4>Armada Lengkap & Terawat</h4>
-                <p>Pilihan kendaraan dari sedan, SUV, hingga minibus. Semua dalam kondisi prima dan ber-AC.</p>
+            {whyUs.features?.map(feature => (
+              <div class="feature-item">
+                <div class="feature-icon">{feature.icon}</div>
+                <div class="feature-text">
+                  <h4>{feature.title}</h4>
+                  <p>{feature.description}</p>
+                </div>
               </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">👨‍✈️</div>
-              <div class="feature-text">
-                <h4>Driver Lokal Berpengalaman</h4>
-                <p>Driver kami adalah warga lokal Lombok yang hafal rute, budaya, dan destinasi terbaik.</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">💎</div>
-              <div class="feature-text">
-                <h4>Harga Transparan</h4>
-                <p>Tidak ada biaya tersembunyi. Semua harga sudah termasuk bensin, parkir, dan retribusi.</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">📱</div>
-              <div class="feature-text">
-                <h4>Booking Mudah via WhatsApp</h4>
-                <p>Pesan kapan saja, konfirmasi cepat. Kami siap merespons dalam hitungan menit.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -123,9 +109,9 @@ const blogPosts = (await getCollection('blog'))
   <section class="transport" id="transport">
     <div class="container">
       <div class="text-center reveal">
-        <span class="section-tag">Layanan Transportasi</span>
-        <h2 class="section-title">Transportasi & Rental Mobil Lombok</h2>
-        <p class="section-subtitle">Mobil terawat, driver ramah, harga bersahabat. Pilih kendaraan sesuai kebutuhan Anda.</p>
+        <span class="section-tag">{transportHeader.tag}</span>
+        <h2 class="section-title">{transportHeader.title}</h2>
+        <p class="section-subtitle">{transportHeader.description}</p>
       </div>
       <div class="transport-grid">
         {transport.map(a => (
@@ -155,8 +141,8 @@ const blogPosts = (await getCollection('blog'))
     <div class="container">
       <div class="packages-header">
         <div>
-          <span class="section-tag">Paket Unggulan</span>
-          <h2 class="section-title">Pilih Petualangan Anda</h2>
+          <span class="section-tag">{packagesHeader.tag}</span>
+          <h2 class="section-title">{packagesHeader.title}</h2>
         </div>
       </div>
       <div class="packages-grid" id="packagesGrid">
@@ -186,31 +172,17 @@ const blogPosts = (await getCollection('blog'))
   <section class="gallery" id="galeri">
     <div class="container">
       <div class="text-center reveal">
-        <span class="section-tag">Galeri Lombok</span>
-        <h2 class="section-title">Destinasi Impian Anda</h2>
-        <p class="section-subtitle">Ribuan kenangan indah telah kami ciptakan bersama pelanggan kami di Lombok.</p>
+        <span class="section-tag">{gallery.tag}</span>
+        <h2 class="section-title">{gallery.title}</h2>
+        <p class="section-subtitle">{gallery.description}</p>
       </div>
       <div class="gallery-grid">
-        <div class="gallery-item reveal">
-          <img src="/img/hero-lombok.jpg" alt="Pantai Lombok" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-label">Pantai Lombok</span></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="/img/gili-trawangan.jpg" alt="Gili Trawangan" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-label">Gili Trawangan</span></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="/img/rinjani-trekking.jpg" alt="Gunung Rinjani" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-label">Gunung Rinjani</span></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="/img/pink-beach.jpg" alt="Pink Beach" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-label">Pink Beach</span></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="/img/paket-wisata.jpg" alt="Wisata Lombok" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-label">Wisata Lombok</span></div>
-        </div>
+        {gallery.items?.map(item => (
+          <div class="gallery-item reveal">
+            <img src={item.image} alt={item.label} loading="lazy" />
+            <div class="gallery-overlay"><span class="gallery-label">{item.label}</span></div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -224,7 +196,7 @@ const blogPosts = (await getCollection('blog'))
       </div>
       <div class="testi-slider">
         {testimonials.map(t => (
-          <TestimonialCard name={t.name} origin={t.origin} text={t.text} rating={t.rating} avatar={t.avatar} />
+          <TestimonialCard name={t.data.name} origin={t.data.origin} text={t.data.text} rating={t.data.rating} avatar={t.data.avatar} />
         ))}
       </div>
     </div>
@@ -235,14 +207,14 @@ const blogPosts = (await getCollection('blog'))
     <div class="container">
       <div class="cta-content">
         <div class="cta-text">
-          <h2 class="section-title">Siap Jelajahi Lombok? 🌴</h2>
-          <p>Hubungi kami sekarang dan dapatkan penawaran terbaik. Respon cepat dalam hitungan menit.</p>
+          <h2 class="section-title">{cta.title}</h2>
+          <p>{cta.description}</p>
         </div>
         <div class="cta-actions">
-          <a href="#" class="btn btn-white" id="openBookingModal">📋 Isi Form Booking</a>
-          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20saya%20ingin%20pesan%20paket%20wisata%20Lombok&utm_source=website"
+          <a href={cta.buttonPrimaryLink} class="btn btn-white" id="openBookingModal">{cta.buttonPrimary}</a>
+          <a href={cta.buttonSecondaryLink}
             class="btn btn-wa" target="_blank" rel="noopener">
-            💬 WhatsApp Kami
+            {cta.buttonSecondary}
           </a>
         </div>
       </div>
@@ -253,9 +225,9 @@ const blogPosts = (await getCollection('blog'))
   <section class="blog" id="blog">
     <div class="container">
       <div class="text-center reveal">
-        <span class="section-tag">Blog & Tips</span>
-        <h2 class="section-title">Inspirasi Perjalanan Lombok</h2>
-        <p class="section-subtitle">Tips, panduan, dan cerita seru seputar wisata Lombok untuk perjalanan Anda.</p>
+        <span class="section-tag">{blogHeader.tag}</span>
+        <h2 class="section-title">{blogHeader.title}</h2>
+        <p class="section-subtitle">{blogHeader.description}</p>
       </div>
       <div class="blog-grid" id="blogGrid">
         {blogPosts.map(p => (

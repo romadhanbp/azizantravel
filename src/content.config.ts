@@ -54,8 +54,55 @@ const blogCollection = defineCollection({
   }),
 });
 
+const homepageCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/homepage' }),
+  schema: z.object({
+    section: z.string(),
+    tag: z.string().optional(),
+    title: z.string().optional(),
+    highlightWord: z.string().optional(),
+    description: z.string().optional(),
+    badge: z.string().optional(),
+    badgeIcon: z.string().optional(),
+    badgeNumber: z.string().optional(),
+    badgeText: z.string().optional(),
+    image: z.string().optional(),
+    buttonPrimary: z.string().optional(),
+    buttonPrimaryLink: z.string().optional(),
+    buttonSecondary: z.string().optional(),
+    buttonSecondaryLink: z.string().optional(),
+    stats: z.array(z.object({
+      number: z.string(),
+      label: z.string(),
+    })).optional(),
+    features: z.array(z.object({
+      icon: z.string(),
+      title: z.string(),
+      description: z.string(),
+    })).optional(),
+    items: z.array(z.object({
+      image: z.string(),
+      label: z.string(),
+    })).optional(),
+  }),
+});
+
+const testimonialCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
+  schema: z.object({
+    name: z.string(),
+    origin: z.string(),
+    text: z.string(),
+    rating: z.number(),
+    avatar: z.string(),
+    order: z.number().optional().default(99),
+  }),
+});
+
 export const collections = {
   packages: packagesCollection,
   transport: transportCollection,
   blog: blogCollection,
+  homepage: homepageCollection,
+  testimonials: testimonialCollection,
 };
