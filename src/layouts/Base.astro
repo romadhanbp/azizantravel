@@ -281,6 +281,18 @@ const ogImg = ogImage || SEO.site.defaultImage;
       email: '{CONFIG.email}'
     };
   </script>
+  <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script is:inline>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
   <script is:inline src="/js/main.js"></script>
 </body>
 </html>
