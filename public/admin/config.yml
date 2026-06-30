@@ -9,59 +9,38 @@ site_url: https://azizantravel.netlify.app
 logo_url: /img/hero-lombok.jpg
 
 collections:
-  - name: packages
-    label: Paket Wisata
-    label_singular: Paket
-    folder: src/content/packages
+  # ============ PAGES ============
+  - name: pages
+    label: Halaman
+    label_singular: Halaman
+    folder: src/content/pages
     create: true
     delete: true
     extension: md
     format: frontmatter
     slug: "{{slug}}"
-    summary: "{{title}} — {{price}}"
-    sortable_fields: [order, title]
+    summary: "{{title}} — {{type}}"
+    sortable_fields: [title, type]
     fields:
       - { label: Judul, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string, pattern: [ "^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan tanda strip" ] }
-      - { label: Kategori, name: category, widget: select, options: [wisata, petualangan, bisnis] }
-      - { label: Gambar, name: image, widget: image, default: "/img/paket-wisata.jpg" }
-      - { label: Badge, name: badge, widget: string, required: false }
-      - { label: Durasi, name: duration, widget: string }
-      - { label: Maks Grup, name: maxGroup, widget: number, required: false, value_type: int }
-      - { label: Kapasitas, name: capacity, widget: string, required: false }
-      - { label: Bagasi, name: luggage, widget: string, required: false }
-      - { label: Harga, name: price, widget: string }
-      - { label: Harga Per, name: pricePer, widget: string }
-      - { label: Termasuk, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
-      - { label: Deskripsi, name: description, widget: text }
-      - { label: Unggulan, name: featured, widget: boolean, default: false, required: false }
-      - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan strip"] }
+      - { label: Tipe Halaman, name: type, widget: select, options: [homepage, page, archive] }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - label: SEO Settings
+        name: seo
+        widget: object
+        fields:
+          - { label: Meta Title, name: title, widget: string, hint: "Judul untuk search engine (50-60 karakter)" }
+          - { label: Meta Description, name: description, widget: text, hint: "Deskripsi untuk search engine (150-160 karakter)" }
+          - { label: Keywords, name: keywords, widget: list, field: { label: Keyword, name: keyword, widget: string }, hint: "Kata kunci untuk SEO" }
+          - { label: OG Title, name: ogTitle, widget: string, hint: "Judul untuk social media sharing" }
+          - { label: OG Description, name: ogDescription, widget: text, hint: "Deskripsi untuk social media sharing" }
+          - { label: OG Image, name: ogImage, widget: image, hint: "Gambar untuk social media sharing" }
+          - { label: Canonical URL, name: canonical, widget: string, hint: "URL utama halaman ini" }
+          - { label: Robots, name: robots, widget: select, options: ["index, follow", "noindex, follow", "index, nofollow", "noindex, nofollow"], default: "index, follow" }
+      - { label: Konten, name: body, widget: markdown, required: false }
 
-  - name: transport
-    label: Transportasi / Kendaraan
-    label_singular: Kendaraan
-    folder: src/content/transportasi
-    create: true
-    delete: true
-    extension: md
-    format: frontmatter
-    slug: "{{slug}}"
-    summary: "{{title}} — {{price}}"
-    sortable_fields: [order, title]
-    fields:
-      - { label: Judul, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string, pattern: [ "^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan tanda strip" ] }
-      - { label: Gambar, name: image, widget: image, default: "/img/transport-bisnis.jpg" }
-      - { label: Badge, name: badge, widget: string, required: false }
-      - { label: Kategori, name: category, widget: string }
-      - { label: Kapasitas, name: capacity, widget: string }
-      - { label: Bagasi, name: luggage, widget: string }
-      - { label: Harga, name: price, widget: string }
-      - { label: Harga Per, name: pricePer, widget: string }
-      - { label: Termasuk, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
-      - { label: Deskripsi, name: description, widget: text }
-      - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }
-
+  # ============ POSTS / BLOG ============
   - name: blog
     label: Blog / Artikel
     label_singular: Artikel
@@ -75,14 +54,79 @@ collections:
     sortable_fields: [date, title]
     fields:
       - { label: Judul, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string, pattern: [ "^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan tanda strip" ] }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan strip"] }
       - { label: Kategori, name: category, widget: string }
       - { label: Tanggal, name: date, widget: date, format: "YYYY-MM-DD" }
-      - { label: Gambar, name: image, widget: image, default: "/img/hero-lombok.jpg" }
+      - { label: Gambar, name: image, widget: image }
+      - { label: Gambar Alt, name: imageAlt, widget: string, hint: "Deskripsi gambar untuk accessibility & SEO" }
+      - { label: Gambar Title, name: imageTitle, widget: string, required: false, hint: "Judul gambar (tooltip)" }
+      - { label: Gambar Caption, name: imageCaption, widget: string, required: false, hint: "Keterangan gambar" }
       - { label: Excerpt, name: excerpt, widget: text }
       - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - label: SEO Settings
+        name: seo
+        widget: object
+        fields:
+          - { label: Meta Title, name: title, widget: string }
+          - { label: Meta Description, name: description, widget: text }
+          - { label: Keywords, name: keywords, widget: list, field: { label: Keyword, name: keyword, widget: string } }
+          - { label: OG Title, name: ogTitle, widget: string }
+          - { label: OG Description, name: ogDescription, widget: text }
+          - { label: OG Image, name: ogImage, widget: image }
+          - { label: Canonical URL, name: canonical, widget: string }
+          - { label: Robots, name: robots, widget: select, options: ["index, follow", "noindex, follow", "index, nofollow", "noindex, nofollow"], default: "index, follow" }
       - { label: Konten, name: body, widget: markdown }
 
+  # ============ CATEGORIES ============
+  - name: categories
+    label: Kategori
+    label_singular: Kategori
+    folder: src/content/categories
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan strip"] }
+      - { label: Deskripsi, name: description, widget: text }
+      - { label: Warna, name: color, widget: string, hint: "Hex color (contoh: #0d9488)" }
+      - { label: Icon, name: icon, widget: string, hint: "Emoji icon" }
+      - { label: Urutan, name: order, widget: number, default: 99 }
+
+  # ============ MEDIA / GALLERY ============
+  - name: media
+    label: Media / Gambar
+    label_singular: Gambar
+    folder: src/content/media
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{category}}"
+    sortable_fields: [order, title, category]
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: File Gambar, name: file, widget: image, hint: "Upload atau pilih gambar" }
+      - { label: Alt Text, name: alt, widget: string, hint: "Deskripsi gambar untuk SEO & accessibility (wajib)" }
+      - { label: Title Atribut, name: title_attr, widget: string, required: false, hint: "Title attribute (tooltip saat hover)" }
+      - { label: Caption, name: caption, widget: string, required: false, hint: "Keterangan/caption gambar" }
+      - { label: Deskripsi, name: description, widget: text, required: false, hint: "Deskripsi lengkap gambar" }
+      - { label: Lebar (px), name: width, widget: number, required: false, hint: "Width dalam pixel" }
+      - { label: Tinggi (px), name: height, widget: number, required: false, hint: "Height dalam pixel" }
+      - { label: Format, name: format, widget: select, options: ["jpg", "jpeg", "png", "gif", "webp", "svg", "avif"], default: "jpg" }
+      - { label: Lazy Loading, name: lazyLoading, widget: boolean, default: true, hint: "Aktifkan lazy loading untuk performa" }
+      - { label: Kategori, name: category, widget: select, options: ["hero", "destinasi", "transportasi", "wisata", "blog", "icon", "other"] }
+      - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+      - { label: Urutan, name: order, widget: number, default: 99 }
+
+  # ============ HOMEPAGE SECTIONS ============
   - name: homepage
     label: Homepage Sections
     label_singular: Section
@@ -132,6 +176,7 @@ collections:
           - { label: Gambar, name: image, widget: image }
           - { label: Label, name: label, widget: string }
 
+  # ============ TESTIMONIALS ============
   - name: testimonials
     label: Testimoni
     label_singular: Testimoni
@@ -140,13 +185,149 @@ collections:
     delete: true
     extension: md
     format: frontmatter
-    slug: "{{name}}"
+    slug: "{{slug}}"
     summary: "{{name}} — {{origin}}"
     sortable_fields: [order, name]
     fields:
       - { label: Nama, name: name, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan strip"] }
       - { label: Asal, name: origin, widget: string }
       - { label: Testimoni, name: text, widget: text }
       - { label: Rating, name: rating, widget: number, min: 1, max: 5 }
       - { label: Avatar (inisial), name: avatar, widget: string }
+      - { label: Urutan, name: order, widget: number, default: 99 }
+
+  # ============ PACKAGES ============
+  - name: packages
+    label: Paket Wisata
+    label_singular: Paket
+    folder: src/content/packages
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{price}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan strip"] }
+      - { label: Kategori, name: category, widget: select, options: [wisata, petualangan, bisnis, custom] }
+      - { label: Gambar, name: image, widget: image, default: "/img/paket-wisata.jpg" }
+      - { label: Gambar Alt, name: imageAlt, widget: string, required: false, hint: "Deskripsi gambar untuk SEO" }
+      - { label: Gambar Title, name: imageTitle, widget: string, required: false }
+      - { label: Badge, name: badge, widget: string, required: false }
+      - { label: Durasi, name: duration, widget: string }
+      - { label: Maks Grup, name: maxGroup, widget: number, required: false, value_type: int }
+      - { label: Kapasitas, name: capacity, widget: string, required: false }
+      - { label: Bagasi, name: luggage, widget: string, required: false }
+      - { label: Harga, name: price, widget: string }
+      - { label: Harga Per, name: pricePer, widget: string }
+      - { label: Termasuk, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
+      - { label: Deskripsi, name: description, widget: text }
+      - { label: Unggulan, name: featured, widget: boolean, default: false, required: false }
+      - { label: Published, name: published, widget: boolean, default: true }
       - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }
+      - label: SEO Settings
+        name: seo
+        widget: object
+        required: false
+        fields:
+          - { label: Meta Title, name: title, widget: string }
+          - { label: Meta Description, name: description, widget: text }
+          - { label: Keywords, name: keywords, widget: list, field: { label: Keyword, name: keyword, widget: string } }
+          - { label: OG Title, name: ogTitle, widget: string }
+          - { label: OG Description, name: ogDescription, widget: text }
+          - { label: OG Image, name: ogImage, widget: image }
+
+  # ============ TRANSPORT ============
+  - name: transport
+    label: Transportasi / Kendaraan
+    label_singular: Kendaraan
+    folder: src/content/transportasi
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{price}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan strip"] }
+      - { label: Gambar, name: image, widget: image, default: "/img/transport-bisnis.jpg" }
+      - { label: Gambar Alt, name: imageAlt, widget: string, required: false, hint: "Deskripsi gambar untuk SEO" }
+      - { label: Gambar Title, name: imageTitle, widget: string, required: false }
+      - { label: Badge, name: badge, widget: string, required: false }
+      - { label: Kategori, name: category, widget: string }
+      - { label: Kapasitas, name: capacity, widget: string }
+      - { label: Bagasi, name: luggage, widget: string }
+      - { label: Harga, name: price, widget: string }
+      - { label: Harga Per, name: pricePer, widget: string }
+      - { label: Termasuk, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
+      - { label: Deskripsi, name: description, widget: text }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }
+      - label: SEO Settings
+        name: seo
+        widget: object
+        required: false
+        fields:
+          - { label: Meta Title, name: title, widget: string }
+          - { label: Meta Description, name: description, widget: text }
+          - { label: Keywords, name: keywords, widget: list, field: { label: Keyword, name: keyword, widget: string } }
+          - { label: OG Title, name: ogTitle, widget: string }
+          - { label: OG Description, name: ogDescription, widget: text }
+          - { label: OG Image, name: ogImage, widget: image }
+
+  # ============ SEO SETTINGS ============
+  - name: seo-settings
+    label: Pengaturan SEO
+    label_singular: Pengaturan
+    folder: src/content/seo-settings
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{section}}"
+    summary: "{{section}}"
+    sortable_fields: [section]
+    fields:
+      - { label: Section, name: section, widget: select, options: [site, organization, social, analytics], read_only: true }
+      - { label: Nama Situs, name: siteName, widget: string, required: false }
+      - { label: Tagline, name: tagline, widget: string, required: false }
+      - { label: URL Situs, name: url, widget: string, required: false }
+      - { label: Bahasa, name: language, widget: string, required: false }
+      - { label: Gambar Default, name: defaultImage, widget: image, required: false }
+      - { label: Twitter Handle, name: twitterHandle, widget: string, required: false }
+      - { label: Deskripsi Organisasi, name: description, widget: text, required: false }
+      - { label: Telepon, name: telephone, widget: string, required: false }
+      - { label: Email, name: email, widget: string, required: false }
+      - label: Alamat
+        name: address
+        widget: object
+        required: false
+        fields:
+          - { label: Jalan, name: street, widget: string }
+          - { label: Kota, name: city, widget: string }
+          - { label: Kabupaten, name: region, widget: string }
+          - { label: Provinsi, name: province, widget: string }
+          - { label: Negara, name: country, widget: string }
+      - label: Koordinat
+        name: geo
+        widget: object
+        required: false
+        fields:
+          - { label: Latitude, name: latitude, widget: string }
+          - { label: Longitude, name: longitude, widget: string }
+      - { label: Instagram, name: instagram, widget: string, required: false }
+      - { label: Facebook, name: facebook, widget: string, required: false }
+      - { label: TikTok, name: tiktok, widget: string, required: false }
+      - { label: WhatsApp, name: whatsapp, widget: string, required: false }
+      - { label: YouTube, name: youtube, widget: string, required: false }
+      - { label: Twitter, name: twitter, widget: string, required: false }
+      - { label: Google Analytics ID, name: googleAnalyticsId, widget: string, required: false }
+      - { label: Google Tag Manager ID, name: googleTagManagerId, widget: string, required: false }
+      - { label: Facebook Pixel ID, name: facebookPixelId, widget: string, required: false }
+      - { label: Hotjar ID, name: hotjarId, widget: string, required: false }
+      - { label: Aktifkan Analytics, name: enabled, widget: boolean, default: false }
