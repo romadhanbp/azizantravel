@@ -23,8 +23,8 @@ const packagesCollection = defineCollection({
   }),
 });
 
-const armadaCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/armada' }),
+const transportCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/transportasi' }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
@@ -56,6 +56,6 @@ const blogCollection = defineCollection({
 
 export const collections = {
   packages: packagesCollection,
-  armada: armadaCollection,
+  transport: transportCollection,
   blog: blogCollection,
 };

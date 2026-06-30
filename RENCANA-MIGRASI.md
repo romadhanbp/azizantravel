@@ -9,7 +9,7 @@
 Migrasi website Azizan Travel dari vanilla HTML/CSS/JS ke **Astro Static Site Generator** dengan:
 
 1. **Pemisahan konten** — Layanan Transportasi dan Paket Wisata dikelola terpisah
-2. **Halaman Armada baru** — `/armada/` khusus kendaraan (Avanza, Xenia, Innova)
+2. **Halaman Transportasi** — `/transportasi/` khusus kendaraan (Avanza, Xenia, Innova)
 3. **6 paket wisata di halaman depan** — Paket Unggulan hanya tampilkan wisata
 4. **Admin dashboard** — Decap CMS untuk edit konten tanpa edit HTML
 5. **Routing berbasis slug** — Blog detail pakai `/blog/[slug]/` bukan `?id=N`
@@ -34,7 +34,7 @@ azizantravel/
 │   │   │   ├── senggigi-sunset.md
 │   │   │   ├── honeymoon.md
 │   │   │   └── custom-trip.md
-│   │   ├── armada/                   # 1 file .md per kendaraan
+│   │   ├── transportasi/             # 1 file .md per kendaraan
 │   │   │   ├── avanza.md
 │   │   │   ├── xenia.md
 │   │   │   └── innova.md
@@ -49,7 +49,7 @@ azizantravel/
 │   │   └── Base.astro                # Layout utama (navbar, footer, modal, bottom-nav)
 │   ├── components/
 │   │   ├── PackageCard.astro         # Komponen kartu paket wisata
-│   │   ├── ArmadaCard.astro          # Komponen kartu armada/kendaraan
+│   │   ├── TransportCard.astro       # Komponen kartu kendaraan
 │   │   ├── BlogCard.astro            # Komponen kartu blog
 │   │   ├── TestimonialCard.astro     # Komponen testimoni
 │   │   ├── BookingModal.astro        # Modal booking form
@@ -62,7 +62,7 @@ azizantravel/
 │   │   └── testimonials.js           # Data testimoni
 │   ├── pages/
 │   │   ├── index.astro               # Halaman depan
-│   │   ├── armada.astro              # Halaman armada (BARU)
+│   │   ├── transportasi.astro        # Halaman transportasi
 │   │   ├── paket.astro               # Halaman paket wisata
 │   │   ├── blog/
 │   │   │   ├── index.astro           # Daftar blog
@@ -106,7 +106,7 @@ order: 1                              # urutan tampil
 ---
 ```
 
-### Armada (src/content/armada/*.md)
+### Transportasi (src/content/transportasi/*.md)
 
 ```yaml
 ---
@@ -151,8 +151,8 @@ Isi artikel dalam Markdown...
 ```
 1. Hero
 2. Mengapa Kami (Why Choose Us)
-3. Layanan Transportasi (3 armada cards)
-   → Tombol "Lihat Armada" → /armada/
+3. Layanan Transportasi (3 kartu kendaraan)
+   → Tombol "Lihat Transportasi" → /transportasi/
 4. Paket Wisata Unggulan (6 paket cards)
    → Tombol "Lihat Semua Paket" → /paket/
 5. Galeri
@@ -177,10 +177,10 @@ Isi artikel dalam Markdown...
 
 ---
 
-## Halaman Armada (`/armada/`)
+## Halaman Transportasi (`/transportasi/`)
 
-- **Page Hero:** "Armada & Kendaraan Kami"
-- **Grid armada cards:** Avanza, Xenia, Innova
+- **Page Hero:** "Kendaraan & Rental Mobil Kami"
+- **Grid kartu kendaraan:** Avanza, Xenia, Innova
   - Info lengkap: kapasitas, koper, harga
   - Include list
   - Tombol "Pesan via WhatsApp"
@@ -191,7 +191,7 @@ Isi artikel dalam Markdown...
 ## Admin Dashboard (Decap CMS)
 
 - Akses via `/admin/`
-- Form-based editing untuk paket, armada, blog
+- Form-based editing untuk paket, transportasi, blog
 - Preview langsung sebelum publish
 - Commit ke Git → auto deploy ke Netlify
 
@@ -213,8 +213,8 @@ Netlify auto-deploy dari Git push.
 | No | Phase | Deskripsi | Estimasi Sesi |
 |----|-------|-----------|---------------|
 | 1 | Init Astro + migrate CSS & shared components | Setup project, pindah CSS, buat layout Base.astro, navbar, footer, modal, bottom-nav | 1-2 sesi |
-| 2 | Migrate data & content collections | Extract config, SEO, testimonials ke data files. Buat content schema untuk packages, armada, blog | 1 sesi |
-| 3 | Build halaman | Build index, armada, paket, blog, kontak, 404 | 2-3 sesi |
+| 2 | Migrate data & content collections | Extract config, SEO, testimonials ke data files. Buat content schema untuk packages, transportasi, blog | 1 sesi |
+| 3 | Build halaman | Build index, transportasi, paket, blog, kontak, 404 | 2-3 sesi |
 | 4 | Admin dashboard + testing | Setup Decap CMS, testing semua halaman, deploy | 1 sesi |
 
 ---

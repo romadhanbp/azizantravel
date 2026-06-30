@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PackageCard from '../components/PackageCard.astro';
-import ArmadaCard from '../components/ArmadaCard.astro';
+import TransportCard from '../components/TransportCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
 import { testimonials } from '../data/testimonials';
@@ -11,7 +11,7 @@ const packages = (await getCollection('packages'))
   .filter(p => p.data.featured && p.data.category !== 'custom')
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 
-const armada = (await getCollection('armada'))
+const transport = (await getCollection('transport'))
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 
 const blogPosts = (await getCollection('blog'))
@@ -125,11 +125,11 @@ const blogPosts = (await getCollection('blog'))
       <div class="text-center reveal">
         <span class="section-tag">Layanan Transportasi</span>
         <h2 class="section-title">Transportasi & Rental Mobil Lombok</h2>
-        <p class="section-subtitle">Mobil terawat, driver ramah, harga bersahabat. Pilih armada sesuai kebutuhan Anda.</p>
+        <p class="section-subtitle">Mobil terawat, driver ramah, harga bersahabat. Pilih kendaraan sesuai kebutuhan Anda.</p>
       </div>
       <div class="transport-grid">
-        {armada.map(a => (
-          <ArmadaCard
+        {transport.map(a => (
+          <TransportCard
             title={a.data.title}
             slug={a.data.slug}
             image={a.data.image}

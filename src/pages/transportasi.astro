@@ -1,13 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
-import ArmadaCard from '../components/ArmadaCard.astro';
+import TransportCard from '../components/TransportCard.astro';
 import { getCollection } from 'astro:content';
 
-const armada = (await getCollection('armada'))
+const transport = (await getCollection('transport'))
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 ---
 
-<Base title="Transportasi & Rental Mobil Lombok" description="Pilih armada kendaraan Azizan Travel: Avanza, Xenia, Innova. Driver profesional, harga transparan, siap Jemput di hotel." activePage="transportasi">
+<Base title="Transportasi & Rental Mobil Lombok" description="Pilih kendaraan Azizan Travel: Avanza, Xenia, Innova. Driver profesional, harga transparan, siap Jemput di hotel." activePage="transportasi">
 
   <section class="page-hero">
     <div class="container">
@@ -25,8 +25,8 @@ const armada = (await getCollection('armada'))
   <section class="paket-section">
     <div class="container">
       <div class="paket-all-grid">
-        {armada.map(a => (
-          <ArmadaCard
+        {transport.map(a => (
+          <TransportCard
             title={a.data.title}
             slug={a.data.slug}
             image={a.data.image}
@@ -53,7 +53,7 @@ const armada = (await getCollection('armada'))
         </div>
         <div class="cta-actions">
           <a href="#" class="btn btn-white" id="openBookingModal">📋 Konsultasi Sekarang</a>
-          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20saya%20ingin%20tanya%20armada&utm_source=website" class="btn btn-wa" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20saya%20ingin%20tanya%20kendaraan&utm_source=website" class="btn btn-wa" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
         </div>
       </div>
     </div>

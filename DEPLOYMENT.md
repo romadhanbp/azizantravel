@@ -75,7 +75,7 @@ Akses `/admin/` di production butuh Git Gateway + Netlify Identity:
 - [ ] Homepage: hero muncul, navbar berfungsi
 - [ ] Navigasi: semua link internal jalan
 - [ ] Paket: card muncul, filter tabs jalan
-- [ ] Transportasi: 3 card armada muncul
+- [ ] Transportasi: 3 kartu kendaraan muncul
 - [ ] Blog: daftar artikel + detail jalan
 - [ ] Kontak: form booking kirim ke WA
 - [ ] Admin panel: bisa login di `/admin/`

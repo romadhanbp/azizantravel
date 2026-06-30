@@ -39,10 +39,10 @@ collections:
       - { label: Unggulan, name: featured, widget: boolean, default: false, required: false }
       - { label: Urutan, name: order, widget: number, default: 99, required: false, value_type: int }
 
-  - name: armada
-    label: Armada / Transportasi
+  - name: transport
+    label: Transportasi / Kendaraan
     label_singular: Kendaraan
-    folder: src/content/armada
+    folder: src/content/transportasi
     create: true
     delete: true
     extension: md

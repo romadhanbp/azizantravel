@@ -21,8 +21,8 @@ export const SEO = {
       country: 'Indonesia'
     },
     geo: {
-      latitude: '-8.6938',
-      longitude: '116.2748'
+      latitude: '-8.6588',
+      longitude: '116.2681'
     }
   },
   social: {
