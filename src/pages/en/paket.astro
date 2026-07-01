@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import PackageCard from '../../components/PackageCard.astro';
+import { getCollection } from 'astro:content';
+
+const packages = (await getCollection('packages-en'))
+  .filter(p => p.data.published)
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+---
+
+<Base title="Lombok Tour Packages - Azizan Travel | Tour, Transport & Airport Transfer" description="Find the complete Lombok tour packages: Gili Islands tour, Rinjani trekking, Pink Beach, airport transfer, and daily car rental. Transparent prices, experienced drivers." activePage="paket" lang="en">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/en">Home</a>
+        <span>/</span>
+        <span>Packages</span>
+      </div>
+      <span class="section-tag">Explore Lombok</span>
+      <h1 class="section-title">All Tour Packages</h1>
+      <p>Choose from our various tour packages, transport, and services we've prepared especially for you</p>
+    </div>
+  </section>
+
+  <section class="paket-section">
+    <div class="container">
+      <div class="paket-filter-bar">
+        <label>Filter:</label>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all" id="filterAll">🌐 All</button>
+          <button class="filter-tab" data-filter="wisata" id="filterWisata">🏖️ Tourism</button>
+          <button class="filter-tab" data-filter="petualangan" id="filterPetualangan">⛰️ Adventure</button>
+          <button class="filter-tab" data-filter="bisnis" id="filterBisnis">💼 Business</button>
+        </div>
+      </div>
+      <div class="paket-all-grid" id="paketAllGrid">
+        {packages.map(p => {
+          let cat = p.data.category;
+          if (p.data.slug && ['avanza', 'xenia', 'innova'].includes(p.data.slug)) cat = 'transport';
+          if (cat === 'custom') cat = 'bisnis';
+          return (
+            <PackageCard
+              title={p.data.title}
+              slug={p.data.slug}
+              category={cat}
+              image={p.data.image}
+              badge={p.data.badge}
+              duration={p.data.duration}
+              maxGroup={p.data.maxGroup}
+              capacity={p.data.capacity}
+              luggage={p.data.luggage}
+              price={p.data.price}
+              pricePer={p.data.pricePer}
+              includes={p.data.includes}
+              description={p.data.description}
+              showIncludes={true}
+            />
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2 class="section-title">Didn't Find What You Need? 🤔</h2>
+          <p>Tell us your needs and we'll create a custom itinerary according to your budget and preferences.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-white" id="openBookingModal">📋 Create Custom Package</a>
+          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20I%20want%20to%20consult%20about%20a%20custom%20package&utm_source=website" class="btn btn-wa" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .paket-section { padding: 60px 0 80px; }
+    .paket-filter-bar {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .paket-filter-bar label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--dark);
+    }
+  </style>
+
+</Base>

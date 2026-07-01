@@ -1,0 +1,109 @@
+---
+import Base from '../../layouts/Base.astro';
+import { CONFIG } from '../../data/config';
+import { SEO } from '../../data/seo';
+---
+
+<Base title="Contact & Location - Azizan Travel Lombok" description="Contact Azizan Travel via WhatsApp, phone, or email. We're ready to serve Lombok tour packages, airport transfer, and car rental." activePage="kontak" lang="en">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/en">Home</a>
+        <span>/</span>
+        <span>Contact</span>
+      </div>
+      <span class="section-tag">Contact Us</span>
+      <h1 class="section-title">Get Complete Information</h1>
+      <p>We're ready to respond to your questions within minutes via WhatsApp</p>
+    </div>
+  </section>
+
+  <section class="contact-section" style="padding:60px 0 80px;">
+    <div class="container">
+      <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+
+        <div class="contact-info-column">
+          <div class="contact-card" style="background:var(--white);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--cream-dark);margin-bottom:24px;">
+            <div class="cc-icon" style="font-size:2rem;margin-bottom:16px;">📍</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:8px;">Address</h3>
+            <p style="color:var(--gray);line-height:1.7;">{CONFIG.address}<br />Nusa Tenggara Barat</p>
+          </div>
+
+          <div class="contact-card" style="background:var(--white);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--cream-dark);margin-bottom:24px;">
+            <div class="cc-icon" style="font-size:2rem;margin-bottom:16px;">📱</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:8px;">WhatsApp / Phone</h3>
+            <p style="color:var(--gray);line-height:1.7;">
+              <a href={`https://wa.me/${CONFIG.waNumber}?utm_source=website`} style="color:var(--primary);font-weight:600;text-decoration:none;">+62 819-9986-8882</a>
+            </p>
+            <p style="color:var(--gray);font-size:0.85rem;">Quick response within minutes</p>
+          </div>
+
+          <div class="contact-card" style="background:var(--white);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--cream-dark);margin-bottom:24px;">
+            <div class="cc-icon" style="font-size:2rem;margin-bottom:16px;">📧</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:8px;">Email</h3>
+            <p style="color:var(--gray);line-height:1.7;">
+              <a href={`mailto:${CONFIG.email}`} style="color:var(--primary);font-weight:600;text-decoration:none;">{CONFIG.email}</a>
+            </p>
+          </div>
+
+          <div class="contact-card" style="background:var(--white);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--cream-dark);">
+            <div class="cc-icon" style="font-size:2rem;margin-bottom:16px;">🕐</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:8px;">Operating Hours</h3>
+            <p style="color:var(--gray);line-height:1.7;">Monday - Sunday: 06:00 - 22:00 WITA<br />24 hours for airport transfer & emergencies</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-form-card" style="background:var(--white);border-radius:var(--radius-lg);padding:40px;border:1px solid var(--cream-dark);">
+            <h3 style="font-family:var(--font-heading);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:8px;">✉️ Send a Message</h3>
+            <p style="color:var(--gray);margin-bottom:28px;">Fill out the form below and we'll respond via WhatsApp</p>
+
+            <form id="bookingForm">
+              <div class="form-group">
+                <label for="namaInput">Full Name *</label>
+                <input type="text" id="namaInput" placeholder="Enter your full name" required />
+              </div>
+              <div class="form-group">
+                <label for="hpInput">WhatsApp Number *</label>
+                <input type="tel" id="hpInput" placeholder="08xxxxxxxxxx" required />
+              </div>
+              <div class="form-group">
+                <label for="paketSelect">Service You Need *</label>
+                <select id="paketSelect" required>
+                  <option value="">-- Select Service --</option>
+                  <option>Lombok Tour Package</option>
+                  <option>Car Rental + Driver</option>
+                  <option>Airport Transfer BIL</option>
+                  <option>Rinjani Mountain Trekking</option>
+                  <option>Custom Package Consultation</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="tanggalInput">Travel Date (optional)</label>
+                <input type="date" id="tanggalInput" />
+              </div>
+              <div class="form-group">
+                <label for="pesanInput">Message / Questions</label>
+                <textarea id="pesanInput" rows="4" placeholder="Tell us about your needs..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-wa" style="width:100%;justify-content:center;">
+                💬 Send via WhatsApp
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="contact-map" style="margin-top:48px;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.456789!2d116.2681!3d-8.6588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd1f2b123456789%3A0x1234567890abcdef!2sJl.%20H%20Muhammad%20Umar%2C%20Telagawaru%2C%20Praya%2C%20Lombok%20Tengah!5e0!3m2!1sid!2sid!4v1"
+          width="100%" height="400" style="border:0;border-radius:var(--radius-lg);" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+</Base>

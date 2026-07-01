@@ -1,0 +1,47 @@
+---
+export interface Props {
+  currentLang: 'id' | 'en';
+}
+
+const { currentLang } = Astro.props;
+---
+
+<div class="lang-switcher" id="langSwitcher">
+  <a href={currentLang === 'id' ? Astro.url.pathname : Astro.url.pathname.replace('/en', '/')} class:list={['lang-btn', { active: currentLang === 'id' }]} data-lang="id">ID</a>
+  <a href={currentLang === 'en' ? Astro.url.pathname : `/en${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`} class:list={['lang-btn', { active: currentLang === 'en' }]} data-lang="en">EN</a>
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 3px;
+    margin-left: 12px;
+  }
+  .lang-btn {
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .lang-btn.active {
+    background: var(--white);
+    color: var(--primary);
+  }
+  .lang-btn:hover:not(.active) {
+    color: var(--white);
+  }
+  /* Solid navbar style */
+  :global(.navbar-solid) .lang-switcher {
+    background: var(--cream);
+  }
+  :global(.navbar-solid) .lang-btn.active {
+    background: var(--primary);
+    color: var(--white);
+  }
+</style>

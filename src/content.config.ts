@@ -211,6 +211,131 @@ const seoSettingsCollection = defineCollection({
   }),
 });
 
+// ============ ENGLISH COLLECTIONS ============
+const packagesEnCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/packages-en' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    category: z.enum(['wisata', 'petualangan', 'bisnis', 'custom']),
+    image: z.string(),
+    imageAlt: z.string().optional(),
+    imageTitle: z.string().optional(),
+    badge: z.string().optional(),
+    duration: z.string(),
+    maxGroup: z.number().optional(),
+    capacity: z.string().optional(),
+    luggage: z.string().optional(),
+    price: z.string(),
+    pricePer: z.string(),
+    includes: z.array(z.string()),
+    description: z.string(),
+    featured: z.boolean().optional().default(false),
+    published: z.boolean().default(true),
+    order: z.number().optional().default(99),
+    seo: seoSchema,
+  }),
+});
+
+const transportEnCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/transportasi-en' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    image: z.string(),
+    imageAlt: z.string().optional(),
+    imageTitle: z.string().optional(),
+    badge: z.string().optional(),
+    category: z.string(),
+    capacity: z.string(),
+    luggage: z.string(),
+    price: z.string(),
+    pricePer: z.string(),
+    includes: z.array(z.string()),
+    description: z.string(),
+    published: z.boolean().default(true),
+    order: z.number().optional().default(99),
+    seo: seoSchema,
+  }),
+});
+
+const blogEnCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog-en' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    category: z.string(),
+    date: z.coerce.date(),
+    image: z.string(),
+    imageAlt: z.string().optional(),
+    imageTitle: z.string().optional(),
+    imageCaption: z.string().optional(),
+    excerpt: z.string(),
+    tags: z.array(z.string()),
+    published: z.boolean().default(true),
+    featured: z.boolean().default(false),
+    seo: seoSchema,
+  }),
+});
+
+const categoriesEnCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/categories-en' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    description: z.string(),
+    color: z.string(),
+    icon: z.string(),
+    order: z.number().default(99),
+  }),
+});
+
+const homepageEnCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/homepage-en' }),
+  schema: z.object({
+    section: z.string(),
+    tag: z.string().optional(),
+    title: z.string().optional(),
+    highlightWord: z.string().optional(),
+    description: z.string().optional(),
+    badge: z.string().optional(),
+    badgeIcon: z.string().optional(),
+    badgeNumber: z.string().optional(),
+    badgeText: z.string().optional(),
+    image: z.string().optional(),
+    buttonPrimary: z.string().optional(),
+    buttonPrimaryLink: z.string().optional(),
+    buttonSecondary: z.string().optional(),
+    buttonSecondaryLink: z.string().optional(),
+    stats: z.array(z.object({
+      number: z.string(),
+      label: z.string(),
+    })).optional(),
+    features: z.array(z.object({
+      icon: z.string(),
+      title: z.string(),
+      description: z.string(),
+    })).optional(),
+    items: z.array(z.object({
+      image: z.string(),
+      label: z.string(),
+    })).optional(),
+  }),
+});
+
+const testimonialEnCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/testimonials-en' }),
+  schema: z.object({
+    name: z.string(),
+    slug: z.string(),
+    origin: z.string(),
+    text: z.string(),
+    rating: z.number(),
+    avatar: z.string(),
+    order: z.number().optional().default(99),
+  }),
+});
+
 export const collections = {
   pages: pagesCollection,
   packages: packagesCollection,
@@ -221,4 +346,10 @@ export const collections = {
   homepage: homepageCollection,
   testimonials: testimonialCollection,
   'seo-settings': seoSettingsCollection,
+  'packages-en': packagesEnCollection,
+  'transport-en': transportEnCollection,
+  'blog-en': blogEnCollection,
+  'categories-en': categoriesEnCollection,
+  'homepage-en': homepageEnCollection,
+  'testimonials-en': testimonialEnCollection,
 };

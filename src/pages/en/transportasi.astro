@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import TransportCard from '../../components/TransportCard.astro';
+import { getCollection } from 'astro:content';
+
+const transport = (await getCollection('transport-en'))
+  .filter(t => t.data.published)
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+---
+
+<Base title="Transport & Car Rental Lombok" description="Choose Azizan Travel vehicles: Avanza, Xenia, Innova. Professional drivers, transparent prices, ready to pick up at your hotel." activePage="transportasi" lang="en">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/en">Home</a>
+        <span>/</span>
+        <span>Transport</span>
+      </div>
+      <span class="section-tag">Transport</span>
+      <h1 class="section-title">Vehicles & Car Rental Lombok</h1>
+      <p>Choose a vehicle that suits your travel needs. All in excellent condition, air-conditioned, and ready to serve.</p>
+    </div>
+  </section>
+
+  <section class="paket-section">
+    <div class="container">
+      <div class="paket-all-grid">
+        {transport.map(a => (
+          <TransportCard
+            title={a.data.title}
+            slug={a.data.slug}
+            image={a.data.image}
+            badge={a.data.badge}
+            category={a.data.category}
+            capacity={a.data.capacity}
+            luggage={a.data.luggage}
+            price={a.data.price}
+            pricePer={a.data.pricePer}
+            includes={a.data.includes}
+            description={a.data.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2 class="section-title">Need a Different Vehicle? 🤔</h2>
+          <p>We also provide other types of vehicles upon request. Contact us for a free consultation.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-white" id="openBookingModal">📋 Consult Now</a>
+          <a href="https://wa.me/6281999868882?text=Halo%20Azizan%20Travel%2C%20I%20want%20to%20inquire%20about%20vehicles&utm_source=website" class="btn btn-wa" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

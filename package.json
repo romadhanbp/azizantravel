@@ -7,7 +7,11 @@
     "dev": "astro dev",
     "dev:cms": "concurrently \"astro dev\" \"decap-server\"",
     "start": "astro dev",
-    "build": "astro build",
+    "sync": "node scripts/sync-all.js",
+    "sync:blog": "node scripts/sync-blog-en.js",
+    "sync:transport": "node scripts/sync-transport-en.js",
+    "sync:packages": "node scripts/sync-packages-en.js",
+    "build": "node scripts/sync-all.js && astro build",
     "preview": "astro preview"
   },
   "dependencies": {

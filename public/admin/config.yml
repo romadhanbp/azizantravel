@@ -331,3 +331,200 @@ collections:
       - { label: Facebook Pixel ID, name: facebookPixelId, widget: string, required: false }
       - { label: Hotjar ID, name: hotjarId, widget: string, required: false }
       - { label: Aktifkan Analytics, name: enabled, widget: boolean, default: false }
+
+  # ============ ENGLISH COLLECTIONS ============
+  - name: blog-en
+    label: "Blog (EN)"
+    label_singular: Article
+    folder: src/content/blog-en
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Lowercase, numbers, and hyphens only"] }
+      - { label: Category, name: category, widget: string }
+      - { label: Date, name: date, widget: date, format: "YYYY-MM-DD" }
+      - { label: Image, name: image, widget: image }
+      - { label: "Image: Alt Text", name: imageAlt, widget: string, hint: "Image description for SEO & accessibility" }
+      - { label: "Image: Title", name: imageTitle, widget: string, required: false, hint: "Title attribute (tooltip)" }
+      - { label: "Image: Caption", name: imageCaption, widget: string, required: false, hint: "Image caption" }
+      - { label: Excerpt, name: excerpt, widget: text }
+      - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - label: SEO Settings
+        name: seo
+        widget: object
+        fields:
+          - { label: Meta Title, name: title, widget: string }
+          - { label: Meta Description, name: description, widget: text }
+          - { label: Keywords, name: keywords, widget: list, field: { label: Keyword, name: keyword, widget: string } }
+          - { label: OG Title, name: ogTitle, widget: string }
+          - { label: OG Description, name: ogDescription, widget: text }
+          - { label: OG Image, name: ogImage, widget: image }
+          - { label: Canonical URL, name: canonical, widget: string }
+          - { label: Robots, name: robots, widget: select, options: ["index, follow", "noindex, follow", "index, nofollow", "noindex, nofollow"], default: "index, follow" }
+      - { label: Content, name: body, widget: markdown }
+
+  - name: packages-en
+    label: "Packages (EN)"
+    label_singular: Package
+    folder: src/content/packages-en
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{price}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Lowercase, numbers, and hyphens only"] }
+      - { label: Category, name: category, widget: select, options: [wisata, petualangan, bisnis, custom] }
+      - { label: Image, name: image, widget: image }
+      - { label: "Image: Alt Text", name: imageAlt, widget: string, hint: "Image description for SEO" }
+      - { label: "Image: Title", name: imageTitle, widget: string, required: false }
+      - { label: Badge, name: badge, widget: string, required: false }
+      - { label: Duration, name: duration, widget: string }
+      - { label: Max Group, name: maxGroup, widget: number, required: false, value_type: int }
+      - { label: Capacity, name: capacity, widget: string, required: false }
+      - { label: Luggage, name: luggage, widget: string, required: false }
+      - { label: Price, name: price, widget: string }
+      - { label: Price Per, name: pricePer, widget: string }
+      - { label: Includes, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
+      - { label: Description, name: description, widget: text }
+      - { label: Featured, name: featured, widget: boolean, default: false, required: false }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Order, name: order, widget: number, default: 99, required: false, value_type: int }
+      - label: SEO Settings
+        name: seo
+        widget: object
+        required: false
+        fields:
+          - { label: Meta Title, name: title, widget: string }
+          - { label: Meta Description, name: description, widget: text }
+          - { label: Keywords, name: keywords, widget: list, field: { label: Keyword, name: keyword, widget: string } }
+          - { label: OG Title, name: ogTitle, widget: string }
+          - { label: OG Description, name: ogDescription, widget: text }
+          - { label: OG Image, name: ogImage, widget: image }
+
+  - name: transport-en
+    label: "Transport (EN)"
+    label_singular: Vehicle
+    folder: src/content/transportasi-en
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} — {{price}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Lowercase, numbers, and hyphens only"] }
+      - { label: Image, name: image, widget: image }
+      - { label: "Image: Alt Text", name: imageAlt, widget: string, hint: "Image description for SEO" }
+      - { label: "Image: Title", name: imageTitle, widget: string, required: false }
+      - { label: Badge, name: badge, widget: string, required: false }
+      - { label: Category, name: category, widget: string }
+      - { label: Capacity, name: capacity, widget: string }
+      - { label: Luggage, name: luggage, widget: string }
+      - { label: Price, name: price, widget: string }
+      - { label: Price Per, name: pricePer, widget: string }
+      - { label: Includes, name: includes, widget: list, field: { label: Item, name: item, widget: string } }
+      - { label: Description, name: description, widget: text }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Order, name: order, widget: number, default: 99, required: false, value_type: int }
+
+  - name: categories-en
+    label: "Categories (EN)"
+    label_singular: Category
+    folder: src/content/categories-en
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Lowercase, numbers, and hyphens only"] }
+      - { label: Description, name: description, widget: text }
+      - { label: Color, name: color, widget: string, hint: "Hex color (e.g., #0d9488)" }
+      - { label: Icon, name: icon, widget: string, hint: "Emoji icon" }
+      - { label: Order, name: order, widget: number, default: 99 }
+
+  - name: homepage-en
+    label: "Homepage (EN)"
+    label_singular: Section
+    folder: src/content/homepage-en
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{section}}"
+    summary: "{{section}}"
+    sortable_fields: [section]
+    fields:
+      - { label: Section ID, name: section, widget: string, pattern: ["^[a-z-]+$", "Lowercase and hyphens only"] }
+      - { label: Tag/Label, name: tag, widget: string, required: false }
+      - { label: Title, name: title, widget: string, required: false }
+      - { label: Highlight Word, name: highlightWord, widget: string, required: false }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Badge Text, name: badge, widget: string, required: false }
+      - { label: Badge Icon, name: badgeIcon, widget: string, required: false }
+      - { label: Badge Number, name: badgeNumber, widget: string, required: false }
+      - { label: Badge Text, name: badgeText, widget: string, required: false }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Primary Button, name: buttonPrimary, widget: string, required: false }
+      - { label: Primary Button Link, name: buttonPrimaryLink, widget: string, required: false }
+      - { label: Secondary Button, name: buttonSecondary, widget: string, required: false }
+      - { label: Secondary Button Link, name: buttonSecondaryLink, widget: string, required: false }
+      - label: Stats
+        name: stats
+        widget: list
+        required: false
+        fields:
+          - { label: Number, name: number, widget: string }
+          - { label: Label, name: label, widget: string }
+      - label: Features
+        name: features
+        widget: list
+        required: false
+        fields:
+          - { label: Icon, name: icon, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: text }
+      - label: Items (Gallery)
+        name: items
+        widget: list
+        required: false
+        fields:
+          - { label: Image, name: image, widget: image }
+          - { label: Label, name: label, widget: string }
+
+  - name: testimonials-en
+    label: "Testimonials (EN)"
+    label_singular: Testimonial
+    folder: src/content/testimonials-en
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{name}} — {{origin}}"
+    sortable_fields: [order, name]
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Slug, name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Lowercase, numbers, and hyphens only"] }
+      - { label: Origin, name: origin, widget: string }
+      - { label: Testimonial, name: text, widget: text }
+      - { label: Rating, name: rating, widget: number, min: 1, max: 5 }
+      - { label: Avatar (initials), name: avatar, widget: string }
+      - { label: Order, name: order, widget: number, default: 99, required: false, value_type: int }

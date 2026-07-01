@@ -1,18 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const url = Astro.url.pathname;
+const isEN = url.startsWith('/en');
 ---
 
-<Base title="Halaman Tidak Ditemukan" description="Maaf, halaman yang Anda cari tidak ditemukan." activePage="index">
+<Base title={isEN ? "Page Not Found" : "Halaman Tidak Ditemukan"} description={isEN ? "Sorry, the page you're looking for is not available." : "Maaf, halaman yang Anda cari tidak ditemukan."} activePage="index" lang={isEN ? 'en' : 'id'}>
 
   <section style="padding: 140px 0 100px; text-align: center;">
     <div class="container">
       <div style="font-size: 5rem; margin-bottom: 24px;">🧭</div>
       <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 700; color: var(--dark); margin-bottom: 12px;">404</h1>
-      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--dark); margin-bottom: 16px;">Halaman Tidak Ditemukan</h2>
+      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--dark); margin-bottom: 16px;">
+        {isEN ? "Page Not Found" : "Halaman Tidak Ditemukan"}
+      </h2>
       <p style="color: var(--gray); max-width: 500px; margin: 0 auto 32px; line-height: 1.8;">
-        Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan. Silakan kembali ke beranda untuk melihat layanan kami.
+        {isEN
+          ? "Sorry, the page you're looking for is not available or has been moved. Please return to the homepage to see our services."
+          : "Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan. Silakan kembali ke beranda untuk melihat layanan kami."}
       </p>
-      <a href="/" class="btn btn-primary">🏠 Kembali ke Beranda</a>
+      <a href={isEN ? '/en' : '/'} class="btn btn-primary">
+        {isEN ? "🏠 Back to Homepage" : "🏠 Kembali ke Beranda"}
+      </a>
     </div>
   </section>
 

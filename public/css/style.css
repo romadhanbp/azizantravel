@@ -1555,6 +1555,24 @@ ul { list-style: none; }
   /* Hide WA float on mobile — integrated into bottom nav */
   .wa-float { display: none !important; }
 
+  /* Language switcher: move inside mobile menu */
+  .lang-switcher {
+    position: fixed;
+    top: 80px;
+    right: 16px;
+    z-index: 999;
+    background: var(--white);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    border-radius: 20px;
+  }
+  .lang-switcher .lang-btn {
+    color: var(--dark);
+  }
+  .lang-switcher .lang-btn.active {
+    background: var(--primary);
+    color: var(--white);
+  }
+
   /* Add padding so content isn't hidden behind bottom nav */
   body { padding-bottom: 70px; }
 

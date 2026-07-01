@@ -1,6 +1,7 @@
 ---
 import { CONFIG } from '../data/config';
 import { SEO } from '../data/seo';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 
 export interface Props {
   title: string;
@@ -9,15 +10,45 @@ export interface Props {
   activePage?: string;
   ogImage?: string;
   navbarStyle?: 'transparent' | 'solid';
+  lang?: 'id' | 'en';
 }
 
-const { title, description, pageKey = 'home', activePage = 'index', ogImage, navbarStyle = 'transparent' } = Astro.props;
+const { title, description, pageKey = 'home', activePage = 'index', ogImage, navbarStyle = 'transparent', lang = 'id' } = Astro.props;
 const pageUrl = SEO.site.url + Astro.url.pathname;
 const ogImg = ogImage || SEO.site.defaultImage;
+
+// Translations
+const t = lang === 'en' ? {
+  navHome: 'Home', navPackages: 'Packages', navTransport: 'Transport', navBlog: 'Blog', navContact: 'Contact', navBookNow: 'Book Now',
+  footerDesc: 'Serving tourism, transportation, and your travel needs in Lombok with professionalism, comfort, and reliability since 2015.',
+  footerServices: 'Our Services', footerNav: 'Navigation', footerContact: 'Contact Us',
+  footerAddress: 'Address', footerWA: 'WhatsApp / Phone', footerEmail: 'Email',
+  footerCopyright: 'All rights reserved.', footerMade: 'Made with ❤️ for Lombok travelers',
+  formTitle: '📋 Booking Form', formName: 'Full Name *', formNamePH: 'Enter your full name',
+  formWA: 'WhatsApp Number *', formWAPH: '08xxxxxxxxxx', formPeople: 'Number of People *', formPeoplePH: 'Number of participants',
+  formPackage: 'Preferred Package *', formDate: 'Departure Date *', formPickup: 'Pickup Location', formPickupPH: 'Hotel / airport / address',
+  formMessage: 'Message / Special Requests', formMessagePH: 'Example: baby, need extra seat, etc.',
+  formSubmit: '💬 Send via WhatsApp',
+  bottomHome: 'Home', bottomPackages: 'Packages', bottomBook: 'Book', bottomBlog: 'Blog', bottomContact: 'Contact',
+} : {
+  navHome: 'Beranda', navPackages: 'Paket', navTransport: 'Transportasi', navBlog: 'Blog', navContact: 'Kontak', navBookNow: 'Pesan Sekarang',
+  footerDesc: 'Melayani wisata, transportasi, dan keperluan perjalanan Anda di Lombok dengan profesional, nyaman, dan terpercaya sejak 2015.',
+  footerServices: 'Layanan Kami', footerNav: 'Navigasi', footerContact: 'Hubungi Kami',
+  footerAddress: 'Alamat', footerWA: 'WhatsApp / Telepon', footerEmail: 'Email',
+  footerCopyright: 'Hak cipta dilindungi undang-undang.', footerMade: 'Dibuat dengan ❤️ untuk wisatawan Lombok',
+  formTitle: '📋 Form Pemesanan', formName: 'Nama Lengkap *', formNamePH: 'Masukkan nama lengkap Anda',
+  formWA: 'No. WhatsApp *', formWAPH: '08xxxxxxxxxx', formPeople: 'Jumlah Orang *', formPeoplePH: 'Jumlah peserta',
+  formPackage: 'Paket yang Diinginkan *', formDate: 'Tanggal Keberangkatan *', formPickup: 'Lokasi Penjemputan', formPickupPH: 'Hotel / bandara / alamat',
+  formMessage: 'Pesan / Permintaan Khusus', formMessagePH: 'Contoh: ada bayi, butuh kursi tambahan, dll.',
+  formSubmit: '💬 Kirim via WhatsApp',
+  bottomHome: 'Beranda', bottomPackages: 'Paket', bottomBook: 'Pesan', bottomBlog: 'Blog', bottomContact: 'Kontak',
+};
+
+const prefix = lang === 'en' ? '/en' : '';
 ---
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,7 +100,7 @@ const ogImg = ogImage || SEO.site.defaultImage;
   <!-- ====== NAVBAR ====== -->
   <nav class:list={['navbar', { 'navbar-solid': navbarStyle === 'solid' }]} id="navbar">
     <div class="nav-container">
-      <a href="/" class="nav-logo">
+      <a href={`${prefix}/`} class="nav-logo">
         <div class="logo-icon">🧭</div>
         <div class="logo-text">
           <span class="logo-name">{SEO.site.name}</span>
@@ -77,13 +108,14 @@ const ogImg = ogImage || SEO.site.defaultImage;
         </div>
       </a>
       <ul class="nav-menu" id="navMenu">
-        <li><a href="/" class="nav-link" class:list={{ active: activePage === 'index' }}>Beranda</a></li>
-        <li><a href="/paket" class="nav-link" class:list={{ active: activePage === 'paket' }}>Paket</a></li>
-        <li><a href="/transportasi" class="nav-link" class:list={{ active: activePage === 'transportasi' }}>Transportasi</a></li>
-        <li><a href="/blog" class="nav-link" class:list={{ active: activePage === 'blog' }}>Blog</a></li>
-        <li><a href="/kontak" class="nav-link" class:list={{ active: activePage === 'kontak' }}>Kontak</a></li>
-        <li><a href="#" class="nav-link nav-cta" id="navBooking">Pesan Sekarang</a></li>
+        <li><a href={`${prefix}/`} class="nav-link" class:list={{ active: activePage === 'index' }}>{t.navHome}</a></li>
+        <li><a href={`${prefix}/paket`} class="nav-link" class:list={{ active: activePage === 'paket' }}>{t.navPackages}</a></li>
+        <li><a href={`${prefix}/transportasi`} class="nav-link" class:list={{ active: activePage === 'transportasi' }}>{t.navTransport}</a></li>
+        <li><a href={`${prefix}/blog`} class="nav-link" class:list={{ active: activePage === 'blog' }}>{t.navBlog}</a></li>
+        <li><a href={`${prefix}/kontak`} class="nav-link" class:list={{ active: activePage === 'kontak' }}>{t.navContact}</a></li>
+        <li><a href="#" class="nav-link nav-cta" id="navBooking">{t.navBookNow}</a></li>
       </ul>
+      <LanguageSwitcher currentLang={lang} />
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -106,8 +138,7 @@ const ogImg = ogImage || SEO.site.defaultImage;
             </div>
           </div>
           <p class="footer-desc">
-            Melayani wisata, transportasi, dan keperluan perjalanan Anda di Lombok dengan profesional, nyaman, dan
-            terpercaya sejak 2015.
+            {t.footerDesc}
           </p>
           <div class="footer-social">
             <a href={SEO.social.instagram} class="social-link" aria-label="Instagram" target="_blank" rel="noopener">📸</a>
@@ -117,33 +148,33 @@ const ogImg = ogImage || SEO.site.defaultImage;
           </div>
         </div>
         <div>
-          <h4 class="footer-title">Layanan Kami</h4>
+          <h4 class="footer-title">{t.footerServices}</h4>
           <ul class="footer-links">
-            <li><a href="/paket">Paket Wisata Lombok</a></li>
-            <li><a href="/transportasi">Sewa Kendaraan</a></li>
-            <li><a href="/transportasi">Airport Transfer</a></li>
-            <li><a href="/paket">Trekking Rinjani</a></li>
-            <li><a href="/paket">Wisata Gili Islands</a></li>
-            <li><a href="/paket">Paket Honeymoon</a></li>
+            <li><a href={`${prefix}/paket`}>{lang === 'en' ? 'Lombok Tour Packages' : 'Paket Wisata Lombok'}</a></li>
+            <li><a href={`${prefix}/transportasi`}>{lang === 'en' ? 'Car Rental' : 'Sewa Kendaraan'}</a></li>
+            <li><a href={`${prefix}/transportasi`}>{lang === 'en' ? 'Airport Transfer' : 'Airport Transfer'}</a></li>
+            <li><a href={`${prefix}/paket`}>{lang === 'en' ? 'Rinjani Trekking' : 'Trekking Rinjani'}</a></li>
+            <li><a href={`${prefix}/paket`}>{lang === 'en' ? 'Gili Islands Tour' : 'Wisata Gili Islands'}</a></li>
+            <li><a href={`${prefix}/paket`}>{lang === 'en' ? 'Honeymoon Package' : 'Paket Honeymoon'}</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="footer-title">Navigasi</h4>
+          <h4 class="footer-title">{t.footerNav}</h4>
           <ul class="footer-links">
-            <li><a href="/">Beranda</a></li>
-            <li><a href="/paket">Paket</a></li>
-            <li><a href="/transportasi">Transportasi</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/kontak">Kontak & Lokasi</a></li>
-            <li><a href="#" id="openBookingModal">Pesan Sekarang</a></li>
+            <li><a href={`${prefix}/`}>{t.navHome}</a></li>
+            <li><a href={`${prefix}/paket`}>{t.navPackages}</a></li>
+            <li><a href={`${prefix}/transportasi`}>{t.navTransport}</a></li>
+            <li><a href={`${prefix}/blog`}>{t.navBlog}</a></li>
+            <li><a href={`${prefix}/kontak`}>{lang === 'en' ? 'Contact & Location' : 'Kontak & Lokasi'}</a></li>
+            <li><a href="#" id="openBookingModal">{t.navBookNow}</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="footer-title">Hubungi Kami</h4>
+          <h4 class="footer-title">{t.footerContact}</h4>
           <div class="contact-item">
             <div class="contact-icon">📍</div>
             <div class="contact-info">
-              <strong>Alamat</strong>
+              <strong>{t.footerAddress}</strong>
               {CONFIG.address}<br />
               Nusa Tenggara Barat
             </div>
@@ -151,22 +182,22 @@ const ogImg = ogImage || SEO.site.defaultImage;
           <div class="contact-item">
             <div class="contact-icon">📱</div>
             <div class="contact-info">
-              <strong>WhatsApp / Telepon</strong>
+              <strong>{t.footerWA}</strong>
               <a href={`https://wa.me/${CONFIG.waNumber}?utm_source=website`}>+62 819-9986-8882</a>
             </div>
           </div>
           <div class="contact-item">
             <div class="contact-icon">📧</div>
             <div class="contact-info">
-              <strong>Email</strong>
+              <strong>{t.footerEmail}</strong>
               <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
             </div>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© <span id="copyrightYear"></span> {SEO.site.name}. Hak cipta dilindungi undang-undang.</p>
-        <p>Dibuat dengan ❤️ untuk wisatawan Lombok</p>
+        <p>© <span id="copyrightYear"></span> {SEO.site.name}. {t.footerCopyright}</p>
+        <p>{t.footerMade}</p>
       </div>
     </div>
   </footer>
@@ -175,26 +206,26 @@ const ogImg = ogImage || SEO.site.defaultImage;
   <div class="modal-overlay" id="bookingModal">
     <div class="modal">
       <div class="modal-header">
-        <h3 class="modal-title">📋 Form Pemesanan</h3>
+        <h3 class="modal-title">{t.formTitle}</h3>
         <button class="modal-close" id="closeModal">✕</button>
       </div>
       <form id="bookingForm">
         <div class="form-group">
-          <label for="namaInput">Nama Lengkap *</label>
-          <input type="text" id="namaInput" placeholder="Masukkan nama lengkap Anda" required />
+          <label for="namaInput">{t.formName}</label>
+          <input type="text" id="namaInput" placeholder={t.formNamePH} required />
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="hpInput">No. WhatsApp *</label>
-            <input type="tel" id="hpInput" placeholder="08xxxxxxxxxx" required />
+            <label for="hpInput">{t.formWA}</label>
+            <input type="tel" id="hpInput" placeholder={t.formWAPH} required />
           </div>
           <div class="form-group">
-            <label for="jumlahInput">Jumlah Orang *</label>
-            <input type="number" id="jumlahInput" min="1" placeholder="Jumlah peserta" required />
+            <label for="jumlahInput">{t.formPeople}</label>
+            <input type="number" id="jumlahInput" min="1" placeholder={t.formPeoplePH} required />
           </div>
         </div>
         <div class="form-group">
-          <label for="paketSelect">Paket yang Diinginkan *</label>
+          <label for="paketSelect">{t.formPackage}</label>
           <select id="paketSelect" required>
             <option value="">-- Pilih Paket --</option>
             <option value="Gili Trawangan Full Day">Gili Trawangan Full Day</option>
@@ -213,20 +244,20 @@ const ogImg = ogImage || SEO.site.defaultImage;
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="tanggalInput">Tanggal Keberangkatan *</label>
+            <label for="tanggalInput">{t.formDate}</label>
             <input type="date" id="tanggalInput" required />
           </div>
           <div class="form-group">
-            <label for="penjemputanInput">Lokasi Penjemputan</label>
-            <input type="text" id="penjemputanInput" placeholder="Hotel / bandara / alamat" />
+            <label for="penjemputanInput">{t.formPickup}</label>
+            <input type="text" id="penjemputanInput" placeholder={t.formPickupPH} />
           </div>
         </div>
         <div class="form-group">
-          <label for="pesanInput">Pesan / Permintaan Khusus</label>
-          <textarea id="pesanInput" placeholder="Contoh: ada bayi, butuh kursi tambahan, dll."></textarea>
+          <label for="pesanInput">{t.formMessage}</label>
+          <textarea id="pesanInput" placeholder={t.formMessagePH}></textarea>
         </div>
         <button type="submit" class="btn btn-wa" style="width:100%; justify-content:center; font-size:1rem;">
-          💬 Kirim via WhatsApp
+          {t.formSubmit}
         </button>
       </form>
     </div>
@@ -249,25 +280,25 @@ const ogImg = ogImage || SEO.site.defaultImage;
   <!-- ====== BOTTOM NAV (Mobile) ====== -->
   <nav class="bottom-nav" aria-label="Navigasi mobile">
     <div class="bottom-nav-inner">
-      <a href="/" class="bottom-nav-item" class:list={{ active: activePage === 'index' }}>
+      <a href={`${prefix}/`} class="bottom-nav-item" class:list={{ active: activePage === 'index' }}>
         <span class="bn-icon">🏠</span>
-        <span class="bn-label">Beranda</span>
+        <span class="bn-label">{t.bottomHome}</span>
       </a>
-      <a href="/paket" class="bottom-nav-item" class:list={{ active: activePage === 'paket' }}>
+      <a href={`${prefix}/paket`} class="bottom-nav-item" class:list={{ active: activePage === 'paket' }}>
         <span class="bn-icon">🗺️</span>
-        <span class="bn-label">Paket</span>
+        <span class="bn-label">{t.bottomPackages}</span>
       </a>
       <a href="#" class="bottom-nav-item bn-cta" id="bottomNavBooking">
         <span class="bn-icon">💬</span>
-        <span class="bn-label">Pesan</span>
+        <span class="bn-label">{t.bottomBook}</span>
       </a>
-      <a href="/blog" class="bottom-nav-item" class:list={{ active: activePage === 'blog' }}>
+      <a href={`${prefix}/blog`} class="bottom-nav-item" class:list={{ active: activePage === 'blog' }}>
         <span class="bn-icon">📖</span>
-        <span class="bn-label">Blog</span>
+        <span class="bn-label">{t.bottomBlog}</span>
       </a>
-      <a href="/kontak" class="bottom-nav-item" class:list={{ active: activePage === 'kontak' }}>
+      <a href={`${prefix}/kontak`} class="bottom-nav-item" class:list={{ active: activePage === 'kontak' }}>
         <span class="bn-icon">📞</span>
-        <span class="bn-label">Kontak</span>
+        <span class="bn-label">{t.bottomContact}</span>
       </a>
     </div>
   </nav>
