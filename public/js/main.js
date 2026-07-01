@@ -9,6 +9,7 @@ const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
+const toTop = document.getElementById('toTop');
 
 let lastScrollY = 0;
 let scrollDirection = 'up';
@@ -26,13 +27,11 @@ window.addEventListener('scroll', () => {
     
     // Auto-hide: hide on scroll down, show on scroll up
     if (currentScrollY > lastScrollY && currentScrollY > 100) {
-      // Scrolling down & past header
       if (scrollDirection !== 'down') {
         navbar.classList.add('navbar-hidden');
         scrollDirection = 'down';
       }
     } else {
-      // Scrolling up
       if (scrollDirection !== 'up') {
         navbar.classList.remove('navbar-hidden');
         scrollDirection = 'up';
@@ -40,6 +39,11 @@ window.addEventListener('scroll', () => {
     }
     
     lastScrollY = currentScrollY;
+  }
+
+  // To-top button visibility
+  if (toTop) {
+    toTop.style.display = window.scrollY > 400 ? 'block' : 'none';
   }
 });
 
@@ -84,8 +88,12 @@ const revealElements = () => {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 };
 
-// Run after a short delay to ensure all content is rendered
-setTimeout(revealElements, 100);
+// Run when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', revealElements);
+} else {
+  revealElements();
+}
 
 // ============================================
 // PACKAGE FILTER
@@ -307,14 +315,6 @@ blogFilterTabs.forEach(tab => {
 // ============================================
 // TO TOP BUTTON
 // ============================================
-const toTop = document.getElementById('toTop');
-
-window.addEventListener('scroll', () => {
-  if (toTop) {
-    toTop.style.display = window.scrollY > 400 ? 'block' : 'none';
-  }
-});
-
 if (toTop) {
   toTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

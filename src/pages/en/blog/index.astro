@@ -35,6 +35,7 @@ const blogPosts = (await getCollection('blog-en'))
             image={p.data.image}
             excerpt={p.data.excerpt}
             tags={p.data.tags}
+            lang="en"
           />
         ))}
       </div>

@@ -8,23 +8,26 @@ export interface Props {
   excerpt: string;
   tags: string[];
   layout?: 'home' | 'list';
+  lang?: 'id' | 'en';
 }
 
-const { title, slug, category, date, image, excerpt, layout = 'list' } = Astro.props;
-const formattedDate = date.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+const { title, slug, category, date, image, excerpt, layout = 'list', lang = 'id' } = Astro.props;
+const formattedDate = date.toLocaleDateString(lang === 'en' ? 'en-US' : 'id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+const blogPrefix = lang === 'en' ? '/en/blog' : '/blog';
+const readMore = lang === 'en' ? 'Read More →' : 'Baca Selengkapnya →';
 ---
 
-<div class="blog-card reveal" data-category={category}>
+<article class="blog-card reveal" data-category={category}>
   <div class="blog-thumb">
-    <img src={image} alt={title} loading="lazy" />
+    <img src={image} alt={title} loading="lazy" width="400" height="240" />
   </div>
   <div class="blog-body">
     <div class="blog-meta">
       <span class="blog-tag">{category}</span>
-      <span class="blog-date">📅 {formattedDate}</span>
+      <time class="blog-date" datetime={date.toISOString()}>📅 {formattedDate}</time>
     </div>
     <h3 class="blog-title">{title}</h3>
     <p class="blog-excerpt">{excerpt}</p>
-    <a href={`/blog/${slug}`} class="blog-link">Baca Selengkapnya →</a>
+    <a href={`${blogPrefix}/${slug}`} class="blog-link">{readMore}</a>
   </div>
-</div>
+</article>

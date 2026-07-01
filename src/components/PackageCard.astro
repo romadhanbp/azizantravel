@@ -21,7 +21,7 @@ const { title, slug, image, badge, category, duration, maxGroup, capacity, lugga
 
 <div class="package-card reveal" data-category={category}>
   <div class="card-image">
-    <img src={image} alt={title} loading="lazy" />
+    <img src={image} alt={title} loading="lazy" width="400" height="250" />
     {badge && (() => {
       const badges = {
         'Populer': { class: 'popular', label: '⭐ Populer' },
@@ -58,7 +58,7 @@ const { title, slug, image, badge, category, duration, maxGroup, capacity, lugga
         <span class="price-amount">{price}</span>
         {pricePer && <span class="price-per">/{pricePer}</span>}
       </div>
-      <a href="#" class="card-btn book-btn" data-package={title}>📩 Pesan</a>
+      <a href="#" class="card-btn book-btn" data-package={title} aria-label={`Pesan ${title}`}>📩 Pesan</a>
     </div>
   </div>
 </div>
